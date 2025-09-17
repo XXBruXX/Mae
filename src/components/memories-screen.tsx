@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useMemo, useTransition } from 'react'
 import { cn } from '@/lib/utils';
 import { initialMemories, type Memory } from '@/lib/memories';
 import { Button } from './ui/button';
-import { ArrowLeft, ArrowRight, Loader2, Wand2, Music } from 'lucide-react';
+import { ArrowRight, Loader2, Wand2, Music } from 'lucide-react';
 import { enhanceMemory } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 
@@ -15,7 +15,7 @@ interface MemoriesScreenProps {
   onShowFinal: () => void;
 }
 
-const MemoriesScreen = ({ isVisible, songTitle, onShowMusic, onShowFinal }: MemoriesScreenProps) => {
+const MemoriesScreen = ({ isVisible, songTitle, onShowFinal }: MemoriesScreenProps) => {
   const [memories, setMemories] = useState<Memory[]>(initialMemories);
   const [currentCard, setCurrentCard] = useState(0);
   const [touchStartX, setTouchStartX] = useState(0);
@@ -62,12 +62,11 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowMusic, onShowFinal }: Memo
 
       if (e.key === 'ArrowLeft') prevCard();
       else if (e.key === 'ArrowRight') nextCard();
-      else if (e.key === 'Escape') onShowMusic();
     };
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [isVisible, prevCard, nextCard, onShowMusic]);
+  }, [isVisible, prevCard, nextCard]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStartX(e.touches[0].clientX);
@@ -122,12 +121,12 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowMusic, onShowFinal }: Memo
           onClick={onShowFinal}
           className="absolute top-4 right-4 sm:top-8 sm:right-8 bg-white/10 border-2 border-white/30 text-white rounded-full px-4 py-2 backdrop-blur-sm hover:bg-white/20 hover:text-white"
         >
-          Avançar <ArrowRight className="ml-2 h-4 w-4" />
+          Finalizar <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
       )}
 
       <h2 className="font-headline text-4xl sm:text-5xl bg-gradient-to-r from-gray-300 via-gray-100 to-white bg-clip-text text-transparent mb-8 text-center">
-        Nossas Memórias Especiais
+        Álbum de Fotos
       </h2>
 
       <div className="relative w-[90vw] max-w-sm h-[400px] sm:h-[500px] flex items-center justify-center perspective-1000">

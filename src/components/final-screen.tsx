@@ -26,12 +26,12 @@ const FinalScreen = ({ isVisible, songTitle, onNavigate }: FinalScreenProps) => 
     >
       <SparklesPreview />
       <div className="absolute inset-0 flex flex-col justify-center items-center text-center">
-        <p className="text-white/80 text-lg mb-4">Você escolheu:</p>
+        <p className="text-white/80 text-lg mb-4">Com a trilha sonora de:</p>
         <h2 className="font-headline text-4xl sm:text-5xl bg-gradient-to-r from-gray-300 via-gray-100 to-white bg-clip-text text-transparent mb-8 text-center">
           {songTitle || 'Uma música especial'}
         </h2>
         <SparkleButton onClick={handleClick}>
-          Início
+          Ver Álbum de Fotos
         </SparkleButton>
       </div>
     </div>

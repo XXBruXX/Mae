@@ -12,11 +12,11 @@ export default function Home() {
 
   const showWelcome = () => setCurrentScreen('welcome');
   const showMusic = () => setCurrentScreen('music');
-  const showMemories = (songTitle?: string) => {
-    setSelectedSongTitle(songTitle);
+  const showMemories = () => {
     setCurrentScreen('memories');
   };
-  const showFinal = () => {
+  const showFinal = (songTitle?: string) => {
+    setSelectedSongTitle(songTitle);
     setCurrentScreen('final');
   };
 
@@ -30,18 +30,18 @@ export default function Home() {
         <MusicSelectionScreen
           isVisible={currentScreen === 'music'}
           onShowWelcome={showWelcome}
-          onShowMemories={showMemories}
+          onShowMemories={showFinal}
+        />
+        <FinalScreen
+          isVisible={currentScreen === 'final'}
+          songTitle={selectedSongTitle}
+          onNavigate={showMemories}
         />
         <MemoriesScreen
           isVisible={currentScreen === 'memories'}
           songTitle={selectedSongTitle}
           onShowMusic={showMusic}
-          onShowFinal={showFinal}
-        />
-        <FinalScreen
-          isVisible={currentScreen === 'final'}
-          songTitle={selectedSongTitle}
-          onNavigate={showWelcome}
+          onShowFinal={showWelcome}
         />
       </div>
     </main>
