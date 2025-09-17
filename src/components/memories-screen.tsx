@@ -4,17 +4,18 @@ import { useState, useEffect, useCallback, useMemo, useTransition } from 'react'
 import { cn } from '@/lib/utils';
 import { initialMemories, type Memory } from '@/lib/memories';
 import { Button } from './ui/button';
-import { ArrowLeft, ArrowRight, Loader2, Wand2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Loader2, Wand2, Music } from 'lucide-react';
 import { enhanceMemory } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 
 interface MemoriesScreenProps {
   isVisible: boolean;
+  songTitle?: string;
   onShowMusic: () => void;
   onShowFinal: () => void;
 }
 
-const MemoriesScreen = ({ isVisible, onShowMusic, onShowFinal }: MemoriesScreenProps) => {
+const MemoriesScreen = ({ isVisible, songTitle, onShowMusic, onShowFinal }: MemoriesScreenProps) => {
   const [memories, setMemories] = useState<Memory[]>(initialMemories);
   const [currentCard, setCurrentCard] = useState(0);
   const [touchStartX, setTouchStartX] = useState(0);
@@ -106,6 +107,16 @@ const MemoriesScreen = ({ isVisible, onShowMusic, onShowFinal }: MemoriesScreenP
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
+      {songTitle && (
+        <div className="now-playing-banner">
+          <Music className="h-5 w-5 text-white/80" />
+          <div className="song-info">
+            <span className="playing-text">Tocando Agora:</span>
+            <span className="song-title-banner truncate">{songTitle}</span>
+          </div>
+        </div>
+      )}
+
       <Button
         variant="ghost"
         onClick={onShowMusic}

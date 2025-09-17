@@ -34,6 +34,7 @@ export default function Home() {
         />
         <MemoriesScreen
           isVisible={currentScreen === 'memories'}
+          songTitle={selectedSongTitle}
           onShowMusic={showMusic}
           onShowFinal={showFinal}
         />
