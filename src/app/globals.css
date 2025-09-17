@@ -350,6 +350,7 @@ body {
   align-items: flex-start;
   text-align: left;
   overflow: hidden;
+  min-width: 0;
 }
 
 .artist {
@@ -371,3 +372,5 @@ body {
     height: 0.2em;
   }
 }
+
+    
