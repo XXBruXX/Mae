@@ -252,14 +252,6 @@ body {
 }
 
 /* From Uiverse.io by Praashoo7 */
-.main {
-  background-color: white;
-  padding: 1em;
-  padding-bottom: 1.1em;
-  border-radius: 15px;
-  margin: 1em;
-}
-
 .loader {
   display: flex;
   flex-direction: row;
@@ -274,7 +266,7 @@ body {
 
 .loader:hover {
   cursor: pointer;
-  background-color: lightgray;
+  background-color: hsla(0, 0%, 100%, 0.1);
 }
 
 .currentplaying {
@@ -289,7 +281,7 @@ body {
 }
 
 .heading {
-  color: black;
+  color: white;
   font-size: 1.1em;
   font-weight: bold;
   align-self: center;
@@ -304,7 +296,7 @@ body {
 .load {
   width: 2px;
   height: 33px;
-  background-color: limegreen;
+  background-color: hsl(var(--primary));
   animation: 1s move6 infinite;
   border-radius: 5px;
   margin: 0.1em;
@@ -328,7 +320,7 @@ body {
   height: 1.6em;
   width: 1.6em;
   clip-path: polygon(50% 50%, 100% 50%, 75% 6.6%);
-  background-color: black;
+  background-color: white;
   transform: rotate(-90deg);
   align-self: center;
   margin-top: 0.7em;
@@ -340,7 +332,7 @@ body {
   margin-right: 1em;
   height: 40px;
   width: 40px;
-  background-color: rgb(233, 232, 232);
+  background-color: hsl(var(--muted));
   align-self: center;
   border-radius: 5px;
 }
@@ -349,12 +341,13 @@ body {
   position: relative;
   transform: rotate(180deg);
   margin-right: 1em;
-  color: black;
+  color: white;
   align-self: center;
 }
 
 .artist {
   font-size: 0.6em;
+  color: hsl(var(--muted-foreground));
 }
 
 @keyframes move6 {
@@ -374,3 +367,5 @@ body {
     height: 0.2em;
   }
 }
+
+    

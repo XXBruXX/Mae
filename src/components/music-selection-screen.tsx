@@ -28,7 +28,7 @@ const MusicSelectionScreen = ({ isVisible, onShowMemories }: MusicSelectionScree
     <div
       className={cn(
         'absolute inset-0 flex flex-col justify-center items-center transition-all duration-800 ease-out',
-        isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'
+        isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       )}
     >
       <Button
@@ -44,7 +44,7 @@ const MusicSelectionScreen = ({ isVisible, onShowMemories }: MusicSelectionScree
       </h2>
 
       <div className="w-full max-w-md px-4">
-        <div className="main">
+        <div className="bg-card/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
           <div className="currentplaying">
             <svg height="50px" width="50px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" className="spotify">
               <radialGradient gradientUnits="userSpaceOnUse" gradientTransform="translate(0 -534)" r="43.888" cy="572.064" cx="33.34" id="ipdIa4~cOclR8yt_ClW93a">
@@ -99,3 +99,5 @@ const MusicSelectionScreen = ({ isVisible, onShowMemories }: MusicSelectionScree
 };
 
 export default MusicSelectionScreen;
+
+    
