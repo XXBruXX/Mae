@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { type Memory } from '@/lib/memories';
 import { Button } from './ui/button';
@@ -13,7 +13,6 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogFooter,
-  DialogClose,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -30,6 +29,8 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowFinal }: MemoriesScreenPro
   const [currentCard, setCurrentCard] = useState(0);
   const [touchStartX, setTouchStartX] = useState(0);
   const [open, setOpen] = useState(false);
+  
+  const formRef = useRef<HTMLFormElement>(null);
 
   const memoriesCount = useMemo(() => memories.length, [memories]);
 
@@ -90,9 +91,11 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowFinal }: MemoriesScreenPro
     }
   };
 
-  const handleAddMemory = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+  const handleAddMemory = (closeOnSave: boolean) => {
+    const form = formRef.current;
+    if (!form) return;
+
+    const formData = new FormData(form);
     const image = formData.get('image') as string;
     const text = formData.get('text') as string;
 
@@ -103,7 +106,14 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowFinal }: MemoriesScreenPro
         text,
       };
       setMemories(prevMemories => [...prevMemories, newMemory]);
-      setOpen(false);
+      
+      if (closeOnSave) {
+        setOpen(false);
+      } else {
+        form.reset();
+        const firstInput = form.querySelector<HTMLInputElement>('input[name="image"]');
+        firstInput?.focus();
+      }
     }
   };
 
@@ -140,7 +150,7 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowFinal }: MemoriesScreenPro
                 Adicione um ícone (emoji) e um texto para a sua memória.
               </DialogDescription>
             </DialogHeader>
-            <form onSubmit={handleAddMemory}>
+            <form ref={formRef} onSubmit={(e) => e.preventDefault()}>
               <div className="grid gap-4 py-4">
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="image" className="text-right">
@@ -156,10 +166,8 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowFinal }: MemoriesScreenPro
                 </div>
               </div>
               <DialogFooter>
-                <DialogClose asChild>
-                  <Button type="button" variant="secondary">Cancelar</Button>
-                </DialogClose>
-                <Button type="submit">Salvar</Button>
+                <Button type="button" variant="secondary" onClick={() => handleAddMemory(false)}>Salvar e Adicionar Outro</Button>
+                <Button type="button" onClick={() => handleAddMemory(true)}>Salvar e Fechar</Button>
               </DialogFooter>
             </form>
           </DialogContent>
