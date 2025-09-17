@@ -20,6 +20,7 @@ const AddMemoriesScreen = ({ isVisible, sessionMemories, onAddCard, onFinish }: 
   const { toast } = useToast();
 
   const handleSaveAll = async () => {
+    let success = false;
     if (sessionMemories.length === 0) {
       onFinish();
       return;
@@ -34,15 +35,19 @@ const AddMemoriesScreen = ({ isVisible, sessionMemories, onAddCard, onFinish }: 
         title: "Memórias Salvas!",
         description: `${sessionMemories.length} novas memórias foram adicionadas ao álbum.`,
       });
-      onFinish();
+      success = true;
     } catch (error) {
       toast({
         variant: "destructive",
         title: "Erro ao Salvar",
         description: "Não foi possível salvar as memórias. Tente novamente.",
       });
+      success = false;
     } finally {
       setIsSaving(false);
+      if (success) {
+        onFinish();
+      }
     }
   };
 
@@ -70,7 +75,7 @@ const AddMemoriesScreen = ({ isVisible, sessionMemories, onAddCard, onFinish }: 
               {sessionMemories.map((mem, index) => (
                 <div key={index} className="bg-white/10 rounded-md p-2 flex flex-col items-center gap-2 aspect-square justify-center overflow-hidden">
                   <div className="relative w-full h-16">
-                    <Image src={mem.image} alt="Memória" layout="fill" objectFit="cover" className="rounded-sm" />
+                    <Image src={mem.image} alt="Memória" fill objectFit="cover" className="rounded-sm" />
                   </div>
                   <p className="text-xs text-white/80 truncate w-full text-center">{mem.text}</p>
                 </div>
