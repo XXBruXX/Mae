@@ -85,15 +85,15 @@ const CreateMemoryScreen = ({ isVisible, onSave, onCancel }: CreateMemoryScreenP
       )}
     >
       <div className="w-full max-w-md">
-        <div className="bg-card text-card-foreground border border-border rounded-lg p-6 shadow-lg">
-          <h2 className="text-xl font-bold mb-2">Adicionar Novo Card</h2>
-          <p className="text-muted-foreground mb-6">
+        <div className="bg-white/5 border border-white/10 rounded-lg p-6 backdrop-blur-sm">
+          <h2 className="text-xl font-bold mb-2 text-white">Adicionar Novo Card</h2>
+          <p className="text-white/60 mb-6">
             Escolha uma imagem e adicione um texto para a sua memória.
           </p>
           <form ref={formRef} onSubmit={(e) => e.preventDefault()}>
             <div className="grid gap-4">
               <div className="space-y-2">
-                <Label htmlFor="image">Imagem</Label>
+                <Label htmlFor="image" className="text-white/80">Imagem</Label>
                 <Input 
                   id="image" 
                   name="image" 
@@ -102,6 +102,7 @@ const CreateMemoryScreen = ({ isVisible, onSave, onCancel }: CreateMemoryScreenP
                   required 
                   onChange={handleFileChange}
                   ref={fileInputRef}
+                  className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
                   />
               </div>
               {imagePreview && (
@@ -110,8 +111,14 @@ const CreateMemoryScreen = ({ isVisible, onSave, onCancel }: CreateMemoryScreenP
                 </div>
               )}
               <div className="space-y-2">
-                <Label htmlFor="text">Texto da Memória</Label>
-                <Textarea id="text" name="text" placeholder="Uma lembrança especial..." required />
+                <Label htmlFor="text" className="text-white/80">Texto da Memória</Label>
+                <Textarea 
+                  id="text" 
+                  name="text" 
+                  placeholder="Uma lembrança especial..." 
+                  required 
+                  className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                />
               </div>
             </div>
             <div className="flex justify-end gap-4 mt-8">
