@@ -17,7 +17,7 @@ export default function Home() {
       <div className="relative z-10 h-full">
         <WelcomeScreen
           isVisible={currentScreen === 'welcome'}
-          onShowMemories={showMemories}
+          onNavigate={showMusic}
         />
         <MemoriesScreen
           isVisible={currentScreen === 'memories'}

@@ -6,13 +6,13 @@ import { SparkleButton } from './ui/sparkle-button';
 
 interface WelcomeScreenProps {
   isVisible: boolean;
-  onShowMemories: () => void;
+  onNavigate: () => void;
 }
 
-const WelcomeScreen = ({ isVisible, onShowMemories }: WelcomeScreenProps) => {
+const WelcomeScreen = ({ isVisible, onNavigate }: WelcomeScreenProps) => {
   const handleClick = () => {
     setTimeout(() => {
-      onShowMemories();
+      onNavigate();
     }, 900);
   };
 
