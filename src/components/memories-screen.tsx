@@ -4,16 +4,17 @@ import { useState, useEffect, useCallback, useMemo, useTransition } from 'react'
 import { cn } from '@/lib/utils';
 import { initialMemories, type Memory } from '@/lib/memories';
 import { Button } from './ui/button';
-import { ArrowLeft, Loader2, Wand2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Loader2, Wand2 } from 'lucide-react';
 import { enhanceMemory } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 
 interface MemoriesScreenProps {
   isVisible: boolean;
   onShowWelcome: () => void;
+  onShowMusic: () => void;
 }
 
-const MemoriesScreen = ({ isVisible, onShowWelcome }: MemoriesScreenProps) => {
+const MemoriesScreen = ({ isVisible, onShowWelcome, onShowMusic }: MemoriesScreenProps) => {
   const [memories, setMemories] = useState<Memory[]>(initialMemories);
   const [currentCard, setCurrentCard] = useState(0);
   const [touchStartX, setTouchStartX] = useState(0);
@@ -112,6 +113,15 @@ const MemoriesScreen = ({ isVisible, onShowWelcome }: MemoriesScreenProps) => {
       >
         <ArrowLeft className="mr-2 h-4 w-4" /> Voltar
       </Button>
+
+      {currentCard === memoriesCount - 1 && (
+        <Button
+          onClick={onShowMusic}
+          className="absolute top-4 right-4 sm:top-8 sm:right-8 bg-white/10 border-2 border-white/30 text-white rounded-full px-4 py-2 backdrop-blur-sm hover:bg-white/20 hover:text-white"
+        >
+          Avançar <ArrowRight className="ml-2 h-4 w-4" />
+        </Button>
+      )}
 
       <h2 className="font-headline text-4xl sm:text-5xl bg-gradient-to-r from-gray-300 via-gray-100 to-white bg-clip-text text-transparent mb-8 text-center">
         Nossas Memórias Especiais
