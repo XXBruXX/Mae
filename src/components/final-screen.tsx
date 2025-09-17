@@ -14,7 +14,7 @@ const FinalScreen = ({ isVisible, songTitle, onNavigate }: FinalScreenProps) => 
   return (
     <div
       className={cn(
-        'absolute inset-0 flex flex-col items-center p-5 transition-all duration-800 ease-out',
+        'absolute inset-0 flex flex-col items-center justify-center p-5 transition-all duration-800 ease-out',
         isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       )}
     >
@@ -29,7 +29,7 @@ const FinalScreen = ({ isVisible, songTitle, onNavigate }: FinalScreenProps) => 
       )}
 
       {/* Container principal para centralizar o conteúdo */}
-      <div className="flex-grow flex flex-col justify-center items-center text-center w-full max-w-2xl pt-16">
+      <div className="flex-grow flex flex-col justify-center items-center text-center w-full max-w-2xl">
         <div>
           <h1 className="text-8xl font-black text-white" style={{ fontFamily: "'Montserrat', sans-serif", lineHeight: '1' }}>
             MAE
