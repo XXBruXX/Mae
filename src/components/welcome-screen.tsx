@@ -10,6 +10,12 @@ interface WelcomeScreenProps {
 }
 
 const WelcomeScreen = ({ isVisible, onShowMemories }: WelcomeScreenProps) => {
+  const handleClick = () => {
+    setTimeout(() => {
+      onShowMemories();
+    }, 800);
+  };
+
   return (
     <div
       className={cn(
@@ -19,7 +25,7 @@ const WelcomeScreen = ({ isVisible, onShowMemories }: WelcomeScreenProps) => {
     >
       <SparklesPreview />
       <div className="absolute bottom-40 text-center">
-        <SparkleButton onClick={onShowMemories}>
+        <SparkleButton onClick={handleClick}>
           Começar
         </SparkleButton>
       </div>
