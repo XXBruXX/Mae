@@ -117,14 +117,6 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowMusic, onShowFinal }: Memo
         </div>
       )}
 
-      <Button
-        variant="ghost"
-        onClick={onShowMusic}
-        className="absolute top-4 left-4 sm:top-8 sm:left-8 bg-white/10 border-2 border-white/30 text-white rounded-full px-4 py-2 backdrop-blur-sm hover:bg-white/20 hover:text-white"
-      >
-        <ArrowLeft className="mr-2 h-4 w-4" /> Voltar
-      </Button>
-
       {currentCard === memoriesCount - 1 && (
         <Button
           onClick={onShowFinal}
