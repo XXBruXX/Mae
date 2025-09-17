@@ -3,7 +3,7 @@
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
 import { SparklesPreview } from './sparkles';
-import { StarBorder } from './ui/star-border';
+import { SparkleButton } from './ui/sparkle-button';
 
 interface WelcomeScreenProps {
   isVisible: boolean;
@@ -20,9 +20,9 @@ const WelcomeScreen = ({ isVisible, onShowMemories }: WelcomeScreenProps) => {
     >
       <SparklesPreview />
       <div className="absolute bottom-20 text-center">
-        <StarBorder onClick={onShowMemories}>
+        <SparkleButton onClick={onShowMemories}>
           Começar
-        </StarBorder>
+        </SparkleButton>
       </div>
     </div>
   );
