@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 @layer base {
@@ -247,6 +247,6 @@ body {
   );
   background-clip: text;
   font-size: 1rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: inherit;
   color: transparent;
 }
