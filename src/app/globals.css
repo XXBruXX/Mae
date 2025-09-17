@@ -252,7 +252,7 @@ body {
 }
 
 .main {
-  background-color: #080808;
+  background-color: #080808 !important;
   color: hsl(var(--foreground));
   padding: 1rem;
   border-radius: 15px;
