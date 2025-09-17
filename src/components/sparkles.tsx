@@ -304,7 +304,7 @@ export function SparklesPreview() {
   return (
     <div className="h-full w-full flex flex-col items-center justify-center overflow-hidden">
       <div className="text-center relative z-20">
-        <h2 className="text-xs font-bold text-white tracking-widest uppercase" style={{ fontFamily: "'Poppins', sans-serif" }}>
+        <h2 className="text-xs font-bold text-white tracking-widest uppercase mb-[-1rem]" style={{ fontFamily: "'Poppins', sans-serif" }}>
           Feliz Aniversario
         </h2>
         <h1 className="text-9xl font-black text-white" style={{ fontFamily: "'Montserrat', sans-serif" }}>
@@ -324,7 +324,7 @@ export function SparklesPreview() {
           particleColor="#FFFFFF"
         />
 
-        <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(ellipse_at_top,transparent_10%,black_40%)] md:[mask-image:radial-gradient(ellipse_at_top,transparent_10%,black_70%)]"></div>
+        <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(ellipse_at_top,transparent_10%,black_70%)] md:[mask-image:radial-gradient(ellipse_at_top,transparent_10%,black_70%)]"></div>
       </div>
     </div>
   );
