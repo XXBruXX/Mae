@@ -1,6 +1,6 @@
-# 🌟 Mae - Álbum Digital de Memórias
+# 🌟 Feliz Aniversário - Álbum Digital de Memórias
 
-Uma aplicação web interativa para criação e visualização de memórias digitais pessoais. Combine fotos, textos e música para criar um álbum único e emocionante das suas lembranças mais especiais.
+Uma aplicação web interativa para celebrar aniversários com memórias digitais pessoais. Combine fotos, textos e música para criar um álbum único e emocionante das suas lembranças mais especiais.
 
 ## 🚀 Como Começar
 
@@ -14,7 +14,7 @@ Uma aplicação web interativa para criação e visualização de memórias digi
 ```bash
 # Clonar o repositório
 git clone [url-do-repo]
-cd Mae
+cd feliz-aniversario
 
 # Instalar dependências
 npm install

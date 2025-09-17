@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Eternal Star',
+  title: 'Feliz Aniversário',
   description: 'Feliz Aniversário, Mãe!',
 };
 

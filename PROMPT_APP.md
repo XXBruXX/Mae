@@ -1,8 +1,8 @@
-# 🌟 Mae - Álbum Digital de Memórias
+# 🌟 Feliz Aniversário - Álbum Digital de Memórias
 
 ## 📋 **Descrição do App**
 
-**Mae** é uma aplicação web interativa para criação e visualização de memórias digitais pessoais. Combine fotos, textos e música para criar um álbum único e emocionante das suas lembranças mais especiais.
+**Feliz Aniversário** é uma aplicação web interativa para celebrar aniversários com memórias digitais pessoais. Combine fotos, textos e música para criar um álbum único e emocionante das suas lembranças mais especiais.
 
 ## ✨ **Funcionalidades Principais**
 
@@ -190,4 +190,4 @@ npm run dev
 
 ---
 
-**Mae** transforma memórias simples em experiências visuais emocionantes, combinando tecnologia moderna com design intuitivo para criar algo verdadeiramente especial. ✨
+**Feliz Aniversário** transforma memórias simples em experiências visuais emocionantes, combinando tecnologia moderna com design intuitivo para criar algo verdadeiramente especial. ✨

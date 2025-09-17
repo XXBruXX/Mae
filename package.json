@@ -1,7 +1,7 @@
 {
-  "name": "mae-album-digital",
+  "name": "feliz-aniversario",
   "version": "1.0.0",
-  "description": "Aplicação web interativa para criação e visualização de memórias digitais pessoais",
+  "description": "Aplicação web interativa para celebrar aniversários com memórias digitais pessoais",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack -p 9002",

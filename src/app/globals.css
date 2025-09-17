@@ -366,7 +366,7 @@ body {
 
 .now-playing-banner {
   position: absolute;
-  top: 1.5rem;
+  bottom: 4rem;
   left: 50%;
   transform: translateX(-50%);
   background-color: rgba(26, 26, 26, 0.7);
@@ -379,6 +379,22 @@ body {
   gap: 0.75rem;
   width: 90%;
   max-width: 400px;
+}
+
+/* Quando há botões no topo - posiciona abaixo deles */
+.now-playing-banner.has-top-buttons {
+  top: 5rem;
+  bottom: auto;
+}
+
+/* Quando há botão embaixo na final screen */
+.now-playing-banner.has-bottom-button {
+  bottom: 7rem;
+}
+
+/* Quando há conteúdo embaixo na memories screen */
+.now-playing-banner.has-bottom-content {
+  bottom: 6rem;
 }
 
 .song-info {

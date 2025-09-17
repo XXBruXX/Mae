@@ -103,7 +103,7 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowFinal, onShowWelcome, onAd
       onTouchEnd={handleTouchEnd}
     >
       {songTitle && (
-        <div className="now-playing-banner">
+        <div className="now-playing-banner has-top-buttons">
           <Music className="h-5 w-5 text-white/80" />
           <div className="song-info">
             <span className="playing-text">Tocando Agora:</span>
