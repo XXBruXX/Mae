@@ -20,7 +20,6 @@ const AddMemoriesScreen = ({ isVisible, sessionMemories, onAddCard, onFinish }: 
   const { toast } = useToast();
 
   const handleSaveAll = async () => {
-    let success = false;
     if (sessionMemories.length === 0) {
       onFinish();
       return;
@@ -28,26 +27,23 @@ const AddMemoriesScreen = ({ isVisible, sessionMemories, onAddCard, onFinish }: 
 
     setIsSaving(true);
     try {
-      for (const memory of sessionMemories) {
-        await addMemory(memory);
-      }
+      await Promise.all(sessionMemories.map(memory => addMemory(memory)));
+      
       toast({
         title: "Memórias Salvas!",
         description: `${sessionMemories.length} novas memórias foram adicionadas ao álbum.`,
       });
-      success = true;
+
+      setIsSaving(false);
+      onFinish();
+
     } catch (error) {
       toast({
         variant: "destructive",
         title: "Erro ao Salvar",
         description: "Não foi possível salvar as memórias. Tente novamente.",
       });
-      success = false;
-    } finally {
       setIsSaving(false);
-      if (success) {
-        onFinish();
-      }
     }
   };
 
