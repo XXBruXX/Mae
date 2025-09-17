@@ -44,7 +44,7 @@ const MusicSelectionScreen = ({ isVisible, onShowMemories }: MusicSelectionScree
       </h2>
 
       <div className="w-full max-w-md px-4">
-        <div className="bg-card/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
+        <div className="main">
           <div className="currentplaying">
             <svg height="50px" width="50px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" className="spotify">
               <radialGradient gradientUnits="userSpaceOnUse" gradientTransform="translate(0 -534)" r="43.888" cy="572.064" cx="33.34" id="ipdIa4~cOclR8yt_ClW93a">
@@ -66,6 +66,11 @@ const MusicSelectionScreen = ({ isVisible, onShowMemories }: MusicSelectionScree
           </div>
           {songs.map(song => (
             <div key={song.id} className="loader" onClick={() => handleSelectSong(song.id)}>
+              <div className="song">
+                <p className="name">{song.title}</p>
+                <p className="artist">{song.artist}</p>
+              </div>
+              <div className="albumcover"></div>
               {selectedSong === song.id ? (
                 <div className="loading">
                   <div className="load"></div>
@@ -76,11 +81,6 @@ const MusicSelectionScreen = ({ isVisible, onShowMemories }: MusicSelectionScree
               ) : (
                 <div className="play"></div>
               )}
-              <div className="albumcover"></div>
-              <div className="song">
-                <p className="name">{song.title}</p>
-                <p className="artist">{song.artist}</p>
-              </div>
             </div>
           ))}
         </div>
