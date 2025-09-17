@@ -18,7 +18,6 @@ interface AddMemoriesScreenProps {
 const AddMemoriesScreen = ({ isVisible, sessionMemories, onAddCard, onFinish }: AddMemoriesScreenProps) => {
   const [isSaving, setIsSaving] = useState(false);
   const { toast } = useToast();
-  const [showButtons, setShowButtons] = useState(true);
 
   const handleSaveAll = async () => {
     if (sessionMemories.length === 0) {
@@ -35,7 +34,7 @@ const AddMemoriesScreen = ({ isVisible, sessionMemories, onAddCard, onFinish }: 
         title: "Memórias Salvas!",
         description: `${sessionMemories.length} novas memórias foram adicionadas ao álbum.`,
       });
-      setShowButtons(false);
+      onFinish();
     } catch (error) {
       toast({
         variant: "destructive",
@@ -80,26 +79,18 @@ const AddMemoriesScreen = ({ isVisible, sessionMemories, onAddCard, onFinish }: 
           )}
         </div>
         
-        {showButtons && (
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button onClick={onAddCard}>
-                <Plus className="mr-2 h-4 w-4" /> Adicionar Card
-            </Button>
-            <Button 
-                variant="secondary" 
-                onClick={handleSaveAll}
-                disabled={isSaving || sessionMemories.length === 0}
-            >
-                {isSaving ? 'Salvando...' : 'Salvar Memórias'}
-            </Button>
-            </div>
-        )}
-        
-        {!showButtons && (
-             <Button onClick={onFinish} className="mt-4">
-                Ver Álbum de Fotos
-            </Button>
-        )}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button onClick={onAddCard}>
+              <Plus className="mr-2 h-4 w-4" /> Adicionar Card
+          </Button>
+          <Button 
+              variant="secondary" 
+              onClick={handleSaveAll}
+              disabled={isSaving}
+          >
+              {isSaving ? 'Salvando...' : (sessionMemories.length > 0 ? 'Salvar e Ver Álbum' : 'Voltar para o Álbum')}
+          </Button>
+        </div>
       </div>
     </div>
   );
