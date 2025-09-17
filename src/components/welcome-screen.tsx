@@ -1,7 +1,6 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Button } from './ui/button';
 import { SparklesPreview } from './sparkles';
 import { SparkleButton } from './ui/sparkle-button';
 
