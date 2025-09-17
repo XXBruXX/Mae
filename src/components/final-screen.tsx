@@ -59,14 +59,14 @@ const FinalScreen = ({ isVisible, songTitle, onNavigate }: FinalScreenProps) => 
 
       {/* Container principal para centralizar o conteúdo */}
       <div className="flex-grow flex flex-col justify-center items-center text-center w-full max-w-2xl relative">
-        <p className="text-white/80 text-lg leading-relaxed max-w-xl">
-          {customText}
-        </p>
-
-        {!customText && (
+        {customText ? (
+            <p className="text-white/80 text-lg leading-relaxed max-w-xl">
+                {customText}
+            </p>
+        ) : (
            <Dialog open={isEditing} onOpenChange={handleOpenChange}>
            <DialogTrigger asChild>
-             <Button variant="outline" className="absolute top-0 right-0 mt-4 mr-4 bg-transparent border-white/30 hover:bg-white/10">
+             <Button variant="outline" className="bg-transparent border-white/30 hover:bg-white/10">
                <Edit className="mr-2 h-4 w-4" /> Adicionar Mensagem
              </Button>
            </DialogTrigger>
