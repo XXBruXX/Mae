@@ -157,6 +157,12 @@ const MusicSelectionScreen = ({ isVisible, onShowWelcome, onChoose }: MusicSelec
                       </Label>
                       <Input id="icon" name="icon" placeholder="🎵" className="col-span-3 bg-white/10 border-white/20 text-white placeholder:text-white/50" required />
                     </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="audio-file" className="text-right text-white/80">
+                        Arquivo
+                      </Label>
+                      <Input id="audio-file" name="audio-file" type="file" accept="audio/*" className="col-span-3 bg-white/10 border-white/20 text-white placeholder:text-white/50" />
+                    </div>
                   </div>
                   <DialogFooter>
                     <DialogClose asChild>
