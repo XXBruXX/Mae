@@ -13,9 +13,10 @@ interface AddMemoriesScreenProps {
   sessionMemories: NewMemory[];
   onAddCard: () => void;
   onFinish: () => void;
+  isEditMode?: boolean; // Controla se está no modo de edição ou visualização
 }
 
-const AddMemoriesScreen = ({ isVisible, sessionMemories, onAddCard, onFinish }: AddMemoriesScreenProps) => {
+const AddMemoriesScreen = ({ isVisible, sessionMemories, onAddCard, onFinish, isEditMode = true }: AddMemoriesScreenProps) => {
   const [isSaving, setIsSaving] = useState(false);
   const { toast } = useToast();
 
@@ -57,16 +58,23 @@ const AddMemoriesScreen = ({ isVisible, sessionMemories, onAddCard, onFinish }: 
     >
       <div className="w-full max-w-md text-center">
         <h2 className="font-headline text-3xl sm:text-4xl bg-gradient-to-r from-gray-400 via-gray-300 to-gray-400 bg-clip-text text-transparent mb-4">
-          Modo de Edição
+          {isEditMode ? 'Modo de Edição' : 'Memórias Salvas'}
         </h2>
         <p className="text-white/70 mb-8">
-          Adicione quantos cards de memória desejar. Quando terminar, salve tudo para ver no álbum.
+          {isEditMode 
+            ? 'Adicione quantos cards de memória desejar. Quando terminar, salve tudo para ver no álbum.'
+            : 'Suas memórias foram salvas com sucesso! Você pode visualizá-las no álbum.'
+          }
         </p>
 
         <div className="bg-white/5 border border-white/10 rounded-lg p-4 mb-8 min-h-[150px]">
-          <h3 className="text-lg font-semibold text-white mb-4">Cards Adicionados ({sessionMemories.length})</h3>
+          <h3 className="text-lg font-semibold text-white mb-4">
+            {isEditMode ? `Cards Adicionados (${sessionMemories.length})` : `Memórias Salvas (${sessionMemories.length})`}
+          </h3>
           {sessionMemories.length === 0 ? (
-            <p className="text-white/50">Nenhum card adicionado nesta sessão.</p>
+            <p className="text-white/50">
+              {isEditMode ? 'Nenhum card adicionado nesta sessão.' : 'Nenhuma memória disponível.'}
+            </p>
           ) : (
             <div className="grid grid-cols-3 sm:grid-cols-4 gap-4">
               {sessionMemories.map((mem, index) => (
@@ -81,18 +89,28 @@ const AddMemoriesScreen = ({ isVisible, sessionMemories, onAddCard, onFinish }: 
           )}
         </div>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button onClick={onAddCard}>
-              <Plus className="mr-2 h-4 w-4" /> Adicionar Card
-          </Button>
-          <Button 
-              variant="secondary" 
-              onClick={handleSaveAll}
-              disabled={isSaving}
-          >
-              {isSaving ? 'Salvando...' : (sessionMemories.length > 0 ? 'Salvar e Ver Álbum' : 'Voltar para o Álbum')}
-          </Button>
-        </div>
+        {isEditMode && (
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button onClick={onAddCard}>
+                <Plus className="mr-2 h-4 w-4" /> Adicionar Card
+            </Button>
+            <Button 
+                variant="secondary" 
+                onClick={handleSaveAll}
+                disabled={isSaving}
+            >
+                {isSaving ? 'Salvando...' : (sessionMemories.length > 0 ? 'Salvar e Ver Álbum' : 'Voltar para o Álbum')}
+            </Button>
+          </div>
+        )}
+        
+        {!isEditMode && (
+          <div className="flex justify-center">
+            <Button onClick={onFinish}>
+              Ver Álbum Completo
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

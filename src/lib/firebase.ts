@@ -1,3 +1,8 @@
+// ARQUIVO DESABILITADO - MIGRADO PARA SUPABASE
+// Este arquivo foi desabilitado após a migração para Supabase
+// Veja src/lib/supabase.ts para a nova configuração
+
+/*
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
@@ -16,3 +21,4 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const db = getFirestore(app);
 
 export { app, db };
+*/

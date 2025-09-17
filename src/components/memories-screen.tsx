@@ -113,11 +113,13 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowFinal, onShowWelcome, onAd
       )}
 
       <div className="absolute top-4 right-4 sm:top-8 sm:right-8 flex items-center gap-4">
-        <Button 
-            onClick={onAddMemory}
-            variant="outline" className="bg-white/10 border-2 border-white/30 text-white rounded-full px-4 py-2 backdrop-blur-sm hover:bg-white/20 hover:text-white">
-          <Plus className="mr-2 h-4 w-4" /> Adicionar Memória
-        </Button>
+        {memories.length === 0 && (
+          <Button 
+              onClick={onAddMemory}
+              variant="outline" className="bg-white/10 border-2 border-white/30 text-white rounded-full px-4 py-2 backdrop-blur-sm hover:bg-white/20 hover:text-white">
+            <Plus className="mr-2 h-4 w-4" /> Adicionar Memória
+          </Button>
+        )}
         
         <Button
           onClick={onShowWelcome}

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
-import { ArrowLeft, Plus, Music } from 'lucide-react';
+import { ArrowLeft, Plus, Music, Play, Pause, Volume2 } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -16,6 +16,8 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useToast } from '@/hooks/use-toast';
+import { useAudioPlayer } from '@/hooks/use-audio-player';
 import { type Song, type NewSong, getSongs, addSong } from '@/lib/memories';
 
 interface MusicSelectionScreenProps {
@@ -27,8 +29,18 @@ interface MusicSelectionScreenProps {
 const MusicSelectionScreen = ({ isVisible, onShowWelcome, onChoose }: MusicSelectionScreenProps) => {
   const [songs, setSongs] = useState<Song[]>([]);
   const [selectedSong, setSelectedSong] = useState<string | null>(null);
+  const [previewSong, setPreviewSong] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
+  
+  // Áudio player para preview
+  const currentSong = songs.find(s => s.id === previewSong);
+  const { isPlaying, play, pause, error } = useAudioPlayer({ 
+    url: currentSong?.audio_url,
+    volume: 0.5,
+    loop: false
+  });
 
   useEffect(() => {
     if (isVisible) {
@@ -45,6 +57,42 @@ const MusicSelectionScreen = ({ isVisible, onShowWelcome, onChoose }: MusicSelec
   const handleSelectSong = (songId: string) => {
     setSelectedSong(songId === selectedSong ? null : songId);
   };
+  
+  const handlePreviewSong = async (songId: string) => {
+    const song = songs.find(s => s.id === songId);
+    
+    if (!song?.audio_url) {
+      toast({
+        variant: "destructive",
+        title: "Sem Áudio",
+        description: "Esta música não possui arquivo de áudio.",
+      });
+      return;
+    }
+    
+    if (previewSong === songId && isPlaying) {
+      pause();
+      setPreviewSong(null);
+    } else {
+      setPreviewSong(songId);
+      // O hook useAudioPlayer vai automaticamente tocar quando o URL mudar
+    }
+  };
+  
+  // Auto-play quando previewSong muda
+  useEffect(() => {
+    if (previewSong && currentSong?.audio_url) {
+      play();
+    }
+  }, [previewSong, currentSong, play]);
+  
+  // Limpar áudio ao sair da tela
+  useEffect(() => {
+    if (!isVisible) {
+      pause();
+      setPreviewSong(null);
+    }
+  }, [isVisible, pause]);
 
   const handleChoose = () => {
     const song = songs.find(s => s.id === selectedSong);
@@ -57,16 +105,30 @@ const MusicSelectionScreen = ({ isVisible, onShowWelcome, onChoose }: MusicSelec
     const title = formData.get('title') as string;
     const artist = formData.get('artist') as string;
     const icon = formData.get('icon') as string;
+    const audioFile = formData.get('audio-file') as File;
 
     if (title && artist && icon && songs.length < 3) {
+      let audioUrl = '';
+      
+      // Se um arquivo foi selecionado, converter para URL
+      if (audioFile && audioFile.size > 0) {
+        audioUrl = URL.createObjectURL(audioFile);
+      }
+      
       const newSong: NewSong = {
         title,
         artist,
         icon,
+        audio_url: audioUrl
       };
+      
       const newId = await addSong(newSong);
       if (newId) {
         setSongs(prevSongs => [...prevSongs, { id: newId, ...newSong }]);
+        toast({
+          title: "Música Adicionada!",
+          description: `"${title}" foi adicionada à lista.`,
+        });
       }
       setOpen(false);
     }
@@ -101,22 +163,37 @@ const MusicSelectionScreen = ({ isVisible, onShowWelcome, onChoose }: MusicSelec
              <div className="text-center p-4">Carregando músicas...</div>
           ) : songs.length > 0 ? (
             songs.map(song => (
-              <div key={song.id} className="loader" onClick={() => handleSelectSong(song.id)}>
+              <div key={song.id} className="loader">
                 <div className="play-icon-container">
-                  {selectedSong === song.id ? (
-                    <div className="loading">
-                      <div className="load"></div>
-                      <div className="load"></div>
-                      <div className="load"></div>
-                    </div>
+                  {previewSong === song.id && isPlaying ? (
+                    <Pause 
+                      className="h-5 w-5 text-primary cursor-pointer" 
+                      onClick={() => handlePreviewSong(song.id)}
+                    />
                   ) : (
-                    <div className="play"></div>
+                    <Play 
+                      className="h-5 w-5 text-primary cursor-pointer" 
+                      onClick={() => handlePreviewSong(song.id)}
+                    />
                   )}
                 </div>
-                <div className="albumcover text-2xl flex items-center justify-center">{song.icon}</div>
-                <div className="song">
+                <div 
+                  className="albumcover text-2xl flex items-center justify-center cursor-pointer" 
+                  onClick={() => handleSelectSong(song.id)}
+                >
+                  {song.icon}
+                  {selectedSong === song.id && (
+                    <div className="absolute inset-0 bg-primary/20 rounded-md flex items-center justify-center">
+                      <Volume2 className="h-4 w-4 text-primary" />
+                    </div>
+                  )}
+                </div>
+                <div className="song cursor-pointer" onClick={() => handleSelectSong(song.id)}>
                   <p className="name truncate">{song.title}</p>
                   <p className="artist">{song.artist}</p>
+                  {song.audio_url && (
+                    <p className="text-xs text-green-400">Áudio disponível</p>
+                  )}
                 </div>
               </div>
             ))

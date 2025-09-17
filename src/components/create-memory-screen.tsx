@@ -26,14 +26,6 @@ const CreateMemoryScreen = ({ isVisible, onSave, onCancel }: CreateMemoryScreenP
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      if (file.size > 2 * 1024 * 1024) { // 2MB limit
-        toast({
-            variant: 'destructive',
-            title: 'Imagem Muito Grande',
-            description: 'Por favor, escolha uma imagem com menos de 2MB.',
-        });
-        return;
-      }
       const reader = new FileReader();
       reader.onload = (e) => {
         const result = e.target?.result as string;
