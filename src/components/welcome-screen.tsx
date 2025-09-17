@@ -18,7 +18,7 @@ const WelcomeScreen = ({ isVisible, onShowMemories }: WelcomeScreenProps) => {
       )}
     >
       <SparklesPreview />
-      <div className="absolute bottom-20 text-center">
+      <div className="absolute bottom-28 text-center">
         <SparkleButton onClick={onShowMemories}>
           Começar
         </SparkleButton>
