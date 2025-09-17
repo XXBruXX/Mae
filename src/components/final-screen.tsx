@@ -47,32 +47,34 @@ const FinalScreen = ({ isVisible, songTitle, onNavigate }: FinalScreenProps) => 
           {customText ?? defaultText}
         </p>
 
-        <Dialog>
-            <DialogTrigger asChild>
-                <Button variant="outline" className="absolute top-0 right-0 mt-4 mr-4 bg-transparent border-white/30 hover:bg-white/10">
-                    <Edit className="h-4 w-4" />
-                </Button>
-            </DialogTrigger>
-            <DialogContent className="bg-white/5 border-white/10 backdrop-blur-sm">
-                <DialogHeader>
-                    <DialogTitle className="text-white">Editar Mensagem</DialogTitle>
-                </DialogHeader>
-                <Textarea 
-                    value={editText}
-                    onChange={(e) => setEditText(e.target.value)}
-                    placeholder="Digite sua mensagem personalizada aqui..."
-                    className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
-                />
-                <DialogFooter>
-                    <DialogClose asChild>
-                        <Button type="button" variant="ghost">Cancelar</Button>
-                    </DialogClose>
-                    <DialogClose asChild>
-                      <Button type="button" onClick={handleSaveText}>Salvar</Button>
-                    </DialogClose>
-                </DialogFooter>
-            </DialogContent>
-        </Dialog>
+        {customText === null && (
+          <Dialog>
+              <DialogTrigger asChild>
+                  <Button variant="outline" className="absolute top-0 right-0 mt-4 mr-4 bg-transparent border-white/30 hover:bg-white/10">
+                      <Edit className="h-4 w-4" />
+                  </Button>
+              </DialogTrigger>
+              <DialogContent className="bg-white/5 border-white/10 backdrop-blur-sm">
+                  <DialogHeader>
+                      <DialogTitle className="text-white">Editar Mensagem</DialogTitle>
+                  </DialogHeader>
+                  <Textarea 
+                      value={editText}
+                      onChange={(e) => setEditText(e.target.value)}
+                      placeholder="Digite sua mensagem personalizada aqui..."
+                      className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                  />
+                  <DialogFooter>
+                      <DialogClose asChild>
+                          <Button type="button" variant="ghost">Cancelar</Button>
+                      </DialogClose>
+                      <DialogClose asChild>
+                        <Button type="button" onClick={handleSaveText}>Salvar</Button>
+                      </DialogClose>
+                  </DialogFooter>
+              </DialogContent>
+          </Dialog>
+        )}
       </div>
 
       <div className="absolute bottom-16 md:bottom-20 text-center">
