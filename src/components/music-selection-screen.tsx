@@ -38,8 +38,8 @@ const MusicSelectionScreen = ({ isVisible, onShowMemories }: MusicSelectionScree
         <ArrowLeft className="mr-2 h-4 w-4" /> Voltar
       </Button>
 
-      <h2 className="font-headline text-4xl sm:text-5xl bg-gradient-to-r from-gray-300 via-gray-100 to-white bg-clip-text text-transparent mb-8 text-center px-4">
-        Escolha uma Música de Fundo
+      <h2 className="font-headline text-3xl sm:text-4xl bg-gradient-to-r from-gray-400 via-gray-300 to-gray-400 bg-clip-text text-transparent mb-8 text-center px-4">
+        Primeiro, escolha uma música
       </h2>
 
       <div className="w-full max-w-sm px-4">
