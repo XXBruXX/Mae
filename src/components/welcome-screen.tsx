@@ -21,7 +21,7 @@ const WelcomeScreen = ({ isVisible, onShowMemories }: WelcomeScreenProps) => {
       <SparklesPreview />
       <div className="absolute bottom-20 text-center">
         <StarBorder onClick={onShowMemories}>
-          Clique para ver nossas memórias
+          Começar
         </StarBorder>
       </div>
     </div>
