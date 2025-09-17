@@ -253,7 +253,7 @@ body {
 
 /* From Uiverse.io by Praashoo7 adapted for this app*/
 .main {
-  background-color: hsl(var(--card));
+  background-color: #080808;
   color: hsl(var(--card-foreground));
   padding: 1em;
   padding-bottom: 1.1em;
