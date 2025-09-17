@@ -253,12 +253,12 @@ body {
 
 /* From Uiverse.io by Praashoo7 adapted for this app*/
 .main {
-  background-color: white;
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
   padding: 1em;
   padding-bottom: 1.1em;
   border-radius: 15px;
   margin: 1em;
-  color: black;
 }
 .loader {
   display: flex;
@@ -274,7 +274,7 @@ body {
 }
 .loader:hover {
   cursor: pointer;
-  background-color: lightgray;
+  background-color: hsl(var(--muted));
 }
 .currentplaying {
   display: flex;
@@ -287,7 +287,7 @@ body {
   margin-right: 0.6em;
 }
 .heading {
-  color: black;
+  color: hsl(var(--card-foreground));
   font-size: 1.1em;
   font-weight: bold;
   align-self: center;
@@ -301,7 +301,7 @@ body {
 .load {
   width: 2px;
   height: 33px;
-  background-color: limegreen;
+  background-color: hsl(var(--primary));
   animation: 1s move6 infinite;
   border-radius: 5px;
   margin: 0.1em;
@@ -320,25 +320,25 @@ body {
   height: 1.6em;
   width: 1.6em;
   clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
-  background-color: black;
+  background-color: hsl(var(--primary));
   justify-self: center;
 }
 .albumcover {
   position: relative;
   height: 40px;
   width: 40px;
-  background-color: rgb(233, 232, 232);
+  background-color: hsl(var(--muted));
   align-self: center;
   border-radius: 5px;
 }
 .song {
   position: relative;
-  color: black;
+  color: hsl(var(--card-foreground));
   align-self: center;
 }
 .artist {
   font-size: 0.6em;
-  color: grey;
+  color: hsl(var(--muted-foreground));
 }
 @keyframes move6 {
   0% {

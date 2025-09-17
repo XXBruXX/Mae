@@ -14,7 +14,6 @@ const songs = [
   { id: '1', title: 'Como é grande o meu amor por você', artist: 'Roberto Carlos' },
   { id: '2', title: 'Trem-Bala', artist: 'Ana Vilela' },
   { id: '3', title: 'La Vie en Rose', artist: 'Édith Piaf' },
-  { id: '4', title: 'My Way', artist: 'Frank Sinatra' },
 ];
 
 const MusicSelectionScreen = ({ isVisible, onShowMemories }: MusicSelectionScreenProps) => {
@@ -43,7 +42,7 @@ const MusicSelectionScreen = ({ isVisible, onShowMemories }: MusicSelectionScree
         Escolha uma Música de Fundo
       </h2>
 
-      <div className="w-full max-w-md px-4">
+      <div className="w-full max-w-sm px-4">
         <div className="main">
           <div className="currentplaying">
             <svg height="50px" width="50px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" className="spotify">
