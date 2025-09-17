@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
 import { ArrowLeft, Plus, Music } from 'lucide-react';
@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { type Song } from '@/lib/memories';
+import { type Song, type NewSong, getSongs, addSong } from '@/lib/memories';
 
 interface MusicSelectionScreenProps {
   isVisible: boolean;
@@ -24,12 +24,23 @@ interface MusicSelectionScreenProps {
   onChoose: (songTitle?: string) => void;
 }
 
-const initialSongs: Song[] = [];
-
 const MusicSelectionScreen = ({ isVisible, onShowWelcome, onChoose }: MusicSelectionScreenProps) => {
-  const [songs, setSongs] = useState<Song[]>(initialSongs);
+  const [songs, setSongs] = useState<Song[]>([]);
   const [selectedSong, setSelectedSong] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (isVisible) {
+      const fetchSongs = async () => {
+        setLoading(true);
+        const fetchedSongs = await getSongs();
+        setSongs(fetchedSongs);
+        setLoading(false);
+      };
+      fetchSongs();
+    }
+  }, [isVisible]);
 
   const handleSelectSong = (songId: string) => {
     setSelectedSong(songId === selectedSong ? null : songId);
@@ -40,7 +51,7 @@ const MusicSelectionScreen = ({ isVisible, onShowWelcome, onChoose }: MusicSelec
     onChoose(song?.title);
   };
   
-  const handleAddSong = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleAddSong = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const title = formData.get('title') as string;
@@ -48,13 +59,15 @@ const MusicSelectionScreen = ({ isVisible, onShowWelcome, onChoose }: MusicSelec
     const icon = formData.get('icon') as string;
 
     if (title && artist && icon && songs.length < 3) {
-      const newSong: Song = {
-        id: (songs.length + 1).toString(),
+      const newSong: NewSong = {
         title,
         artist,
         icon,
       };
-      setSongs(prevSongs => [...prevSongs, newSong]);
+      const newId = await addSong(newSong);
+      if (newId) {
+        setSongs(prevSongs => [...prevSongs, { id: newId, ...newSong }]);
+      }
       setOpen(false);
     }
   };
@@ -84,26 +97,32 @@ const MusicSelectionScreen = ({ isVisible, onShowWelcome, onChoose }: MusicSelec
             <Music className="h-8 w-8 text-primary" />
             <p className="heading">Music Player</p>
           </div>
-          {songs.map(song => (
-            <div key={song.id} className="loader" onClick={() => handleSelectSong(song.id)}>
-              <div className="play-icon-container">
-                {selectedSong === song.id ? (
-                  <div className="loading">
-                    <div className="load"></div>
-                    <div className="load"></div>
-                    <div className="load"></div>
-                  </div>
-                ) : (
-                  <div className="play"></div>
-                )}
+          {loading ? (
+             <div className="text-center p-4">Carregando músicas...</div>
+          ) : songs.length > 0 ? (
+            songs.map(song => (
+              <div key={song.id} className="loader" onClick={() => handleSelectSong(song.id)}>
+                <div className="play-icon-container">
+                  {selectedSong === song.id ? (
+                    <div className="loading">
+                      <div className="load"></div>
+                      <div className="load"></div>
+                      <div className="load"></div>
+                    </div>
+                  ) : (
+                    <div className="play"></div>
+                  )}
+                </div>
+                <div className="albumcover text-2xl flex items-center justify-center">{song.icon}</div>
+                <div className="song">
+                  <p className="name truncate">{song.title}</p>
+                  <p className="artist">{song.artist}</p>
+                </div>
               </div>
-              <div className="albumcover text-2xl flex items-center justify-center">{song.icon}</div>
-              <div className="song">
-                <p className="name truncate">{song.title}</p>
-                <p className="artist">{song.artist}</p>
-              </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <div className="text-center p-4 text-muted-foreground">Nenhuma música adicionada.</div>
+          )}
             {songs.length < 3 && (
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>

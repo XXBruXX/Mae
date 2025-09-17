@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { cn } from '@/lib/utils';
-import { type Memory } from '@/lib/memories';
+import { type Memory, type NewMemory, getMemories, addMemory } from '@/lib/memories';
 import { Button } from './ui/button';
 import { Home, Music, Plus } from 'lucide-react';
 import {
@@ -30,10 +30,23 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowFinal, onShowWelcome }: Me
   const [currentCard, setCurrentCard] = useState(0);
   const [touchStartX, setTouchStartX] = useState(0);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   
   const formRef = useRef<HTMLFormElement>(null);
 
   const memoriesCount = useMemo(() => memories.length, [memories]);
+
+  useEffect(() => {
+    if (isVisible) {
+      const fetchMemories = async () => {
+        setLoading(true);
+        const fetchedMemories = await getMemories();
+        setMemories(fetchedMemories);
+        setLoading(false);
+      };
+      fetchMemories();
+    }
+  }, [isVisible]);
 
   const nextCard = useCallback(() => {
     if (memoriesCount === 0) return;
@@ -92,7 +105,7 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowFinal, onShowWelcome }: Me
     }
   };
 
-  const handleAddMemory = (closeOnSave: boolean) => {
+  const handleAddMemory = async (closeOnSave: boolean) => {
     const form = formRef.current;
     if (!form) return;
 
@@ -101,12 +114,15 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowFinal, onShowWelcome }: Me
     const text = formData.get('text') as string;
 
     if (image && text) {
-      const newMemory: Memory = {
-        id: (memories.length + 1).toString(),
+      const newMemory: NewMemory = {
         image,
         text,
       };
-      setMemories(prevMemories => [...prevMemories, newMemory]);
+      const newId = await addMemory(newMemory);
+
+      if (newId) {
+        setMemories(prevMemories => [...prevMemories, { id: newId, ...newMemory }]);
+      }
       
       if (closeOnSave) {
         setOpen(false);
@@ -187,7 +203,9 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowFinal, onShowWelcome }: Me
       </h2>
 
       <div className="relative w-[90vw] max-w-sm h-[400px] sm:h-[500px] flex items-center justify-center perspective-1000">
-        {memories.length === 0 ? (
+        {loading ? (
+          <div className="text-center text-white/70">Carregando memórias...</div>
+        ) : memories.length === 0 ? (
           <div className="text-center text-white/70">
             <p>Nenhuma memória adicionada ainda.</p>
             <p>Clique em "Adicionar Memória" para começar.</p>
@@ -248,5 +266,3 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowFinal, onShowWelcome }: Me
 };
 
 export default MemoriesScreen;
-
-    
