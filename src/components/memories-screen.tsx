@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { type Memory } from '@/lib/memories';
 import { Button } from './ui/button';
-import { ArrowLeft, Music, Plus } from 'lucide-react';
+import { ArrowLeft, Home, Music, Plus } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -22,9 +22,10 @@ interface MemoriesScreenProps {
   isVisible: boolean;
   songTitle?: string;
   onShowFinal: () => void;
+  onShowWelcome: () => void;
 }
 
-const MemoriesScreen = ({ isVisible, songTitle, onShowFinal }: MemoriesScreenProps) => {
+const MemoriesScreen = ({ isVisible, songTitle, onShowFinal, onShowWelcome }: MemoriesScreenProps) => {
   const [memories, setMemories] = useState<Memory[]>([]);
   const [currentCard, setCurrentCard] = useState(0);
   const [touchStartX, setTouchStartX] = useState(0);
@@ -178,6 +179,12 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowFinal }: MemoriesScreenPro
           className="bg-white/10 border-2 border-white/30 text-white rounded-full px-4 py-2 backdrop-blur-sm hover:bg-white/20 hover:text-white"
         >
           <ArrowLeft className="mr-2 h-4 w-4" /> Voltar
+        </Button>
+        <Button
+          onClick={onShowWelcome}
+          className="bg-white/10 border-2 border-white/30 text-white rounded-full px-4 py-2 backdrop-blur-sm hover:bg-white/20 hover:text-white"
+        >
+          <Home className="mr-2 h-4 w-4" /> Início
         </Button>
       </div>
 
