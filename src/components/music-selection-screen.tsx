@@ -92,7 +92,7 @@ const MusicSelectionScreen = ({ isVisible, onShowWelcome, onChoose }: MusicSelec
       </h2>
 
       <div className="w-full max-w-sm px-4">
-        <div className="main">
+        <div className="bg-white/5 border border-white/10 rounded-lg p-4 backdrop-blur-sm">
           <div className="currentplaying">
             <Music className="h-8 w-8 text-primary" />
             <p className="heading">Music Player</p>
@@ -126,47 +126,41 @@ const MusicSelectionScreen = ({ isVisible, onShowWelcome, onChoose }: MusicSelec
             {songs.length < 3 && (
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
-                <Button variant="outline" className="w-full mt-2">
+                <Button variant="outline" className="w-full mt-2 bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white">
                   <Plus className="mr-2 h-4 w-4" /> Adicionar Música
                 </Button>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
+              <DialogContent className="bg-white/5 border border-white/10 backdrop-blur-sm sm:max-w-[425px]">
                 <DialogHeader>
-                  <DialogTitle>Adicionar Nova Música</DialogTitle>
-                  <DialogDescription>
+                  <DialogTitle className="text-white">Adicionar Nova Música</DialogTitle>
+                  <DialogDescription className="text-white/70">
                     Preencha os detalhes da música. O limite é de 3 músicas.
                   </DialogDescription>
                 </DialogHeader>
                 <form onSubmit={handleAddSong}>
                   <div className="grid gap-4 py-4">
                     <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="title" className="text-right">
+                      <Label htmlFor="title" className="text-right text-white/80">
                         Nome
                       </Label>
-                      <Input id="title" name="title" className="col-span-3" required />
+                      <Input id="title" name="title" className="col-span-3 bg-white/10 border-white/20 text-white placeholder:text-white/50" required />
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="artist" className="text-right">
+                      <Label htmlFor="artist" className="text-right text-white/80">
                         Artista
                       </Label>
-                      <Input id="artist" name="artist" className="col-span-3" required />
+                      <Input id="artist" name="artist" className="col-span-3 bg-white/10 border-white/20 text-white placeholder:text-white/50" required />
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="icon" className="text-right">
+                      <Label htmlFor="icon" className="text-right text-white/80">
                         Ícone
                       </Label>
-                      <Input id="icon" name="icon" placeholder="🎵" className="col-span-3" required />
-                    </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="file" className="text-right">
-                        Arquivo
-                      </Label>
-                      <Input id="file" type="file" className="col-span-3" accept=".mp3,.mp4" />
+                      <Input id="icon" name="icon" placeholder="🎵" className="col-span-3 bg-white/10 border-white/20 text-white placeholder:text-white/50" required />
                     </div>
                   </div>
                   <DialogFooter>
                     <DialogClose asChild>
-                      <Button type="button" variant="secondary">Cancelar</Button>
+                      <Button type="button" variant="ghost">Cancelar</Button>
                     </DialogClose>
                     <Button type="submit">Salvar</Button>
                   </DialogFooter>

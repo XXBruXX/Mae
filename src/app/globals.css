@@ -10,8 +10,8 @@ body {
   :root {
     --background: 233 34% 14%;
     --foreground: 240 8% 95%;
-    --card: 240 67% 97%;
-    --card-foreground: 233 34% 14%;
+    --card: 233 34% 14%;
+    --card-foreground: 240 8% 95%;
     --popover: 233 34% 14%;
     --popover-foreground: 240 8% 95%;
     --primary: 240 67% 97%;
@@ -249,14 +249,6 @@ body {
   font-size: 1rem;
   font-family: inherit;
   color: transparent;
-}
-
-div.main {
-  background-color: hsl(var(--card));
-  color: hsl(var(--card-foreground));
-  padding: 1rem;
-  border-radius: 15px;
-  border: 1px solid hsl(var(--border));
 }
 
 .currentplaying {
