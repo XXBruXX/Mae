@@ -1,39 +1,25 @@
 'use client';
 
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { cn } from '@/lib/utils';
-import { type Memory, type NewMemory, getMemories, addMemory } from '@/lib/memories';
+import { type Memory, getMemories } from '@/lib/memories';
 import { Button } from './ui/button';
 import { Home, Music, Plus } from 'lucide-react';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogFooter,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 
 interface MemoriesScreenProps {
   isVisible: boolean;
   songTitle?: string;
   onShowFinal: () => void;
   onShowWelcome: () => void;
+  onAddMemory: () => void;
 }
 
-const MemoriesScreen = ({ isVisible, songTitle, onShowFinal, onShowWelcome }: MemoriesScreenProps) => {
+const MemoriesScreen = ({ isVisible, songTitle, onShowFinal, onShowWelcome, onAddMemory }: MemoriesScreenProps) => {
   const [memories, setMemories] = useState<Memory[]>([]);
   const [currentCard, setCurrentCard] = useState(0);
   const [touchStartX, setTouchStartX] = useState(0);
-  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   
-  const formRef = useRef<HTMLFormElement>(null);
-
   const memoriesCount = useMemo(() => memories.length, [memories]);
 
   useEffect(() => {
@@ -42,6 +28,7 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowFinal, onShowWelcome }: Me
         setLoading(true);
         const fetchedMemories = await getMemories();
         setMemories(fetchedMemories);
+        setCurrentCard(0); // Reset to first card
         setLoading(false);
       };
       fetchMemories();
@@ -105,40 +92,11 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowFinal, onShowWelcome }: Me
     }
   };
 
-  const handleAddMemory = async (closeOnSave: boolean) => {
-    const form = formRef.current;
-    if (!form) return;
-
-    const formData = new FormData(form);
-    const image = formData.get('image') as string;
-    const text = formData.get('text') as string;
-
-    if (image && text) {
-      const newMemory: NewMemory = {
-        image,
-        text,
-      };
-      const newId = await addMemory(newMemory);
-
-      if (newId) {
-        setMemories(prevMemories => [...prevMemories, { id: newId, ...newMemory }]);
-      }
-      
-      if (closeOnSave) {
-        setOpen(false);
-      } else {
-        form.reset();
-        const firstInput = form.querySelector<HTMLInputElement>('input[name="image"]');
-        firstInput?.focus();
-      }
-    }
-  };
-
   return (
     <div
       className={cn(
         'absolute inset-0 flex flex-col justify-center items-center transition-all duration-800 ease-out',
-        isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'
+        isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       )}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
@@ -154,41 +112,11 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowFinal, onShowWelcome }: Me
       )}
 
       <div className="absolute top-4 right-4 sm:top-8 sm:right-8 flex items-center gap-4">
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
-            <Button variant="outline" className="bg-white/10 border-2 border-white/30 text-white rounded-full px-4 py-2 backdrop-blur-sm hover:bg-white/20 hover:text-white">
-              <Plus className="mr-2 h-4 w-4" /> Adicionar Memória
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>Adicionar Nova Memória</DialogTitle>
-              <DialogDescription>
-                Adicione um ícone (emoji) e um texto para a sua memória.
-              </DialogDescription>
-            </DialogHeader>
-            <form ref={formRef} onSubmit={(e) => e.preventDefault()}>
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="image" className="text-right">
-                    Ícone
-                  </Label>
-                  <Input id="image" name="image" placeholder="💖" className="col-span-3" required />
-                </div>
-                <div className="grid grid-cols-4 items-start gap-4">
-                  <Label htmlFor="text" className="text-right pt-2">
-                    Texto
-                  </Label>
-                  <Textarea id="text" name="text" className="col-span-3" required />
-                </div>
-              </div>
-              <DialogFooter>
-                <Button type="button" variant="secondary" onClick={() => handleAddMemory(false)}>Salvar e Adicionar Outro</Button>
-                <Button type="button" onClick={() => handleAddMemory(true)}>Salvar e Fechar</Button>
-              </DialogFooter>
-            </form>
-          </DialogContent>
-        </Dialog>
+        <Button 
+            onClick={onAddMemory}
+            variant="outline" className="bg-white/10 border-2 border-white/30 text-white rounded-full px-4 py-2 backdrop-blur-sm hover:bg-white/20 hover:text-white">
+          <Plus className="mr-2 h-4 w-4" /> Adicionar Memória
+        </Button>
         
         <Button
           onClick={onShowWelcome}
