@@ -1,13 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 
-const Star = ({ sizeClass, top, left, animationDelay }: { sizeClass: string; top: string; left: string; animationDelay: string }) => (
+const Star = memo(({ sizeClass, top, left, animationDelay }: { sizeClass: string; top: string; left: string; animationDelay: string }) => (
   <div
     className={`star absolute bg-white rounded-full animate-twinkle ${sizeClass}`}
     style={{ top, left, animationDelay }}
   />
-);
+));
+Star.displayName = 'Star';
 
 const StarryBackground = () => {
   const [stars, setStars] = useState<{ sizeClass: string; top: string; left: string; animationDelay: string }[]>([]);
@@ -44,4 +45,4 @@ const StarryBackground = () => {
   );
 };
 
-export default StarryBackground;
+export default memo(StarryBackground);
