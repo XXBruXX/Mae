@@ -7,8 +7,8 @@ import { ArrowLeft } from 'lucide-react';
 
 interface MusicSelectionScreenProps {
   isVisible: boolean;
-  onShowMemories: () => void;
-  onShowFinal: (songTitle?: string) => void;
+  onShowWelcome: () => void;
+  onShowMemories: (songTitle?: string) => void;
 }
 
 const songs = [
@@ -17,7 +17,7 @@ const songs = [
   { id: '3', title: 'La Vie en Rose', artist: 'Édith Piaf' },
 ];
 
-const MusicSelectionScreen = ({ isVisible, onShowMemories, onShowFinal }: MusicSelectionScreenProps) => {
+const MusicSelectionScreen = ({ isVisible, onShowWelcome, onShowMemories }: MusicSelectionScreenProps) => {
   const [selectedSong, setSelectedSong] = useState<string | null>(null);
 
   const handleSelectSong = (songId: string) => {
@@ -26,7 +26,7 @@ const MusicSelectionScreen = ({ isVisible, onShowMemories, onShowFinal }: MusicS
 
   const handleChoose = () => {
     const song = songs.find(s => s.id === selectedSong);
-    onShowFinal(song?.title);
+    onShowMemories(song?.title);
   };
 
   return (
@@ -38,7 +38,7 @@ const MusicSelectionScreen = ({ isVisible, onShowMemories, onShowFinal }: MusicS
     >
       <Button
         variant="ghost"
-        onClick={onShowMemories}
+        onClick={onShowWelcome}
         className="absolute top-4 left-4 sm:top-8 sm:left-8 bg-white/10 border-2 border-white/30 text-white rounded-full px-4 py-2 backdrop-blur-sm hover:bg-white/20 hover:text-white"
       >
         <ArrowLeft className="mr-2 h-4 w-4" /> Voltar

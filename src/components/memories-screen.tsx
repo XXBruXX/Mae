@@ -10,11 +10,11 @@ import { useToast } from '@/hooks/use-toast';
 
 interface MemoriesScreenProps {
   isVisible: boolean;
-  onShowWelcome: () => void;
   onShowMusic: () => void;
+  onShowFinal: () => void;
 }
 
-const MemoriesScreen = ({ isVisible, onShowWelcome, onShowMusic }: MemoriesScreenProps) => {
+const MemoriesScreen = ({ isVisible, onShowMusic, onShowFinal }: MemoriesScreenProps) => {
   const [memories, setMemories] = useState<Memory[]>(initialMemories);
   const [currentCard, setCurrentCard] = useState(0);
   const [touchStartX, setTouchStartX] = useState(0);
@@ -61,12 +61,12 @@ const MemoriesScreen = ({ isVisible, onShowWelcome, onShowMusic }: MemoriesScree
 
       if (e.key === 'ArrowLeft') prevCard();
       else if (e.key === 'ArrowRight') nextCard();
-      else if (e.key === 'Escape') onShowWelcome();
+      else if (e.key === 'Escape') onShowMusic();
     };
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [isVisible, prevCard, nextCard, onShowWelcome]);
+  }, [isVisible, prevCard, nextCard, onShowMusic]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStartX(e.touches[0].clientX);
@@ -108,7 +108,7 @@ const MemoriesScreen = ({ isVisible, onShowWelcome, onShowMusic }: MemoriesScree
     >
       <Button
         variant="ghost"
-        onClick={onShowWelcome}
+        onClick={onShowMusic}
         className="absolute top-4 left-4 sm:top-8 sm:left-8 bg-white/10 border-2 border-white/30 text-white rounded-full px-4 py-2 backdrop-blur-sm hover:bg-white/20 hover:text-white"
       >
         <ArrowLeft className="mr-2 h-4 w-4" /> Voltar
@@ -116,7 +116,7 @@ const MemoriesScreen = ({ isVisible, onShowWelcome, onShowMusic }: MemoriesScree
 
       {currentCard === memoriesCount - 1 && (
         <Button
-          onClick={onShowMusic}
+          onClick={onShowFinal}
           className="absolute top-4 right-4 sm:top-8 sm:right-8 bg-white/10 border-2 border-white/30 text-white rounded-full px-4 py-2 backdrop-blur-sm hover:bg-white/20 hover:text-white"
         >
           Avançar <ArrowRight className="ml-2 h-4 w-4" />

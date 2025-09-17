@@ -10,34 +10,34 @@ export default function Home() {
   const [currentScreen, setCurrentScreen] = useState('welcome');
   const [selectedSongTitle, setSelectedSongTitle] = useState<string | undefined>(undefined);
 
-
   const showWelcome = () => setCurrentScreen('welcome');
-  const showMemories = () => setCurrentScreen('memories');
   const showMusic = () => setCurrentScreen('music');
-  const showFinal = (songTitle?: string) => {
+  const showMemories = (songTitle?: string) => {
     setSelectedSongTitle(songTitle);
+    setCurrentScreen('memories');
+  };
+  const showFinal = () => {
     setCurrentScreen('final');
   };
-  
 
   return (
     <main className="relative w-full h-screen overflow-hidden bg-black">
       <div className="relative z-10 h-full">
         <WelcomeScreen
           isVisible={currentScreen === 'welcome'}
-          onNavigate={showMemories}
-        />
-        <MemoriesScreen
-          isVisible={currentScreen === 'memories'}
-          onShowWelcome={showWelcome}
-          onShowMusic={showMusic}
+          onNavigate={showMusic}
         />
         <MusicSelectionScreen
           isVisible={currentScreen === 'music'}
+          onShowWelcome={showWelcome}
           onShowMemories={showMemories}
+        />
+        <MemoriesScreen
+          isVisible={currentScreen === 'memories'}
+          onShowMusic={showMusic}
           onShowFinal={showFinal}
         />
-         <FinalScreen
+        <FinalScreen
           isVisible={currentScreen === 'final'}
           songTitle={selectedSongTitle}
           onNavigate={showWelcome}
