@@ -113,7 +113,7 @@ body {
   align-items: center;
   gap: 0.5rem;
   transform-origin: center;
-  padding: 1rem 2rem;
+  padding: 0.75rem 1.5rem;
   background-color: transparent;
   border: none;
   border-radius: var(--border_radius);
@@ -199,7 +199,7 @@ body {
 .button .sparkle {
   position: relative;
   z-index: 10;
-  width: 1.75rem;
+  width: 1.5rem;
 }
 .button .sparkle .path {
   fill: currentColor;
@@ -245,7 +245,7 @@ body {
     hsla(0 0% 100% / var(--active, 0)) 120%
   );
   background-clip: text;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-family: 'Poppins', sans-serif;
   color: transparent;
 }
