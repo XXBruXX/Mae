@@ -252,10 +252,11 @@ body {
 }
 
 div.main {
-  background-color: #080808;
-  color: hsl(var(--foreground));
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
   padding: 1rem;
   border-radius: 15px;
+  border: 1px solid hsl(var(--border));
 }
 
 .currentplaying {
