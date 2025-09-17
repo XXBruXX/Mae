@@ -34,7 +34,7 @@ const CreateMemoryScreen = ({ isVisible, onSave, onCancel }: CreateMemoryScreenP
       toast({
         variant: 'destructive',
         title: 'Campos Incompletos',
-        description: 'Por favor, preencha o ícone e o texto da memória.',
+        description: 'Por favor, preencha a URL da imagem e o texto da memória.',
       });
     }
   };
@@ -50,13 +50,13 @@ const CreateMemoryScreen = ({ isVisible, onSave, onCancel }: CreateMemoryScreenP
         <div className="bg-card text-card-foreground border border-border rounded-lg p-6 shadow-lg">
           <h2 className="text-xl font-bold mb-2">Adicionar Novo Card</h2>
           <p className="text-muted-foreground mb-6">
-            Adicione um ícone (emoji) e um texto para a sua memória.
+            Cole a URL de uma imagem e adicione um texto para a sua memória.
           </p>
           <form ref={formRef} onSubmit={(e) => e.preventDefault()}>
             <div className="grid gap-4">
               <div className="space-y-2">
-                <Label htmlFor="image">Ícone</Label>
-                <Input id="image" name="image" placeholder="💖" required />
+                <Label htmlFor="image">URL da Imagem</Label>
+                <Input id="image" name="image" placeholder="https://exemplo.com/imagem.png" required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="text">Texto da Memória</Label>

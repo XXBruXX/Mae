@@ -6,6 +6,7 @@ import { type NewMemory, addMemory } from '@/lib/memories';
 import { Button } from './ui/button';
 import { Plus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import Image from 'next/image';
 
 interface AddMemoriesScreenProps {
   isVisible: boolean;
@@ -27,8 +28,6 @@ const AddMemoriesScreen = ({ isVisible, sessionMemories, onAddCard, onFinish }: 
 
     setIsSaving(true);
     try {
-      // Here you would typically batch-write to the database
-      // For now, we add them one by one
       for (const memory of sessionMemories) {
         await addMemory(memory);
       }
@@ -36,7 +35,7 @@ const AddMemoriesScreen = ({ isVisible, sessionMemories, onAddCard, onFinish }: 
         title: "Memórias Salvas!",
         description: `${sessionMemories.length} novas memórias foram adicionadas ao álbum.`,
       });
-      setShowButtons(false); // Hide buttons after saving
+      setShowButtons(false);
     } catch (error) {
       toast({
         variant: "destructive",
@@ -70,8 +69,10 @@ const AddMemoriesScreen = ({ isVisible, sessionMemories, onAddCard, onFinish }: 
           ) : (
             <div className="grid grid-cols-3 sm:grid-cols-4 gap-4">
               {sessionMemories.map((mem, index) => (
-                <div key={index} className="bg-white/10 rounded-md p-2 flex flex-col items-center gap-2 aspect-square justify-center">
-                  <span className="text-3xl">{mem.image}</span>
+                <div key={index} className="bg-white/10 rounded-md p-2 flex flex-col items-center gap-2 aspect-square justify-center overflow-hidden">
+                  <div className="relative w-full h-16">
+                    <Image src={mem.image} alt="Memória" layout="fill" objectFit="cover" className="rounded-sm" />
+                  </div>
                   <p className="text-xs text-white/80 truncate w-full text-center">{mem.text}</p>
                 </div>
               ))}

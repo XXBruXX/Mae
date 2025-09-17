@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { type Memory, getMemories } from '@/lib/memories';
 import { Button } from './ui/button';
 import { Home, Music, Plus } from 'lucide-react';
+import Image from 'next/image';
 
 interface MemoriesScreenProps {
   isVisible: boolean;
@@ -153,8 +154,8 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowFinal, onShowWelcome, onAd
                   style={{ transform: getTransform(className) }}
                   onClick={() => goToCard(index)}
                 >
-                  <div className="w-full h-[200px] sm:h-[250px] bg-gradient-to-br from-gray-200 to-gray-300 rounded-md mb-4 flex items-center justify-center text-6xl">
-                    {memory.image}
+                  <div className="relative w-full h-[200px] sm:h-[250px] bg-gradient-to-br from-gray-200 to-gray-300 rounded-md mb-4 flex items-center justify-center overflow-hidden">
+                    <Image src={memory.image} alt={memory.text} layout="fill" objectFit="cover" />
                   </div>
                   <div className="flex-grow flex items-center justify-center">
                     <p className="font-headline text-xl text-center font-semibold leading-snug text-black">
