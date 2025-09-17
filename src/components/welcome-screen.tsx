@@ -13,7 +13,7 @@ const WelcomeScreen = ({ isVisible, onShowMemories }: WelcomeScreenProps) => {
   const handleClick = () => {
     setTimeout(() => {
       onShowMemories();
-    }, 1200);
+    }, 2000);
   };
 
   return (
@@ -24,7 +24,7 @@ const WelcomeScreen = ({ isVisible, onShowMemories }: WelcomeScreenProps) => {
       )}
     >
       <SparklesPreview />
-      <div className="absolute bottom-40 text-center">
+      <div className="absolute bottom-28 md:bottom-20 text-center">
         <SparkleButton onClick={handleClick}>
           Começar
         </SparkleButton>
