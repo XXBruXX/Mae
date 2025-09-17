@@ -347,7 +347,6 @@ div.main {
   color: hsl(var(--foreground));
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   text-align: left;
   overflow: hidden;
   min-width: 0;
