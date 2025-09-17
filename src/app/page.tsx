@@ -41,7 +41,6 @@ export default function Home() {
           isVisible={currentScreen === 'memories'}
           songTitle={selectedSongTitle}
           onShowMusic={showMusic}
-          onShowFinal={showWelcome}
         />
       </div>
     </main>

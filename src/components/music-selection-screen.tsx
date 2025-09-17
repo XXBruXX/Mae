@@ -24,11 +24,7 @@ interface MusicSelectionScreenProps {
   onShowMemories: (songTitle?: string) => void;
 }
 
-const initialSongs: Song[] = [
-  { id: '1', title: 'Como é grande o meu amor por você', artist: 'Roberto Carlos', icon: '🎵' },
-  { id: '2', title: 'Trem-Bala', artist: 'Ana Vilela', icon: '🚂' },
-  { id: '3', title: 'La Vie en Rose', artist: 'Édith Piaf', icon: '🌹' },
-];
+const initialSongs: Song[] = [];
 
 const MusicSelectionScreen = ({ isVisible, onShowWelcome, onShowMemories }: MusicSelectionScreenProps) => {
   const [songs, setSongs] = useState<Song[]>(initialSongs);
@@ -164,10 +160,10 @@ const MusicSelectionScreen = ({ isVisible, onShowWelcome, onShowMemories }: Musi
       
       <Button
         className="mt-8 bg-white/90 text-black font-bold hover:bg-white"
-        disabled={!selectedSong}
+        disabled={!selectedSong && songs.length > 0}
         onClick={handleChoose}
       >
-        Escolher
+        {songs.length > 0 ? 'Escolher' : 'Pular'}
       </Button>
 
     </div>
