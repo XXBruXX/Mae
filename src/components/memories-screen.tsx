@@ -1,12 +1,10 @@
 'use client';
 
-import { useState, useEffect, useCallback, useMemo, useTransition } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { initialMemories, type Memory } from '@/lib/memories';
 import { Button } from './ui/button';
-import { ArrowRight, Loader2, Wand2, Music } from 'lucide-react';
-import { enhanceMemory } from '@/app/actions';
-import { useToast } from '@/hooks/use-toast';
+import { ArrowRight, Music } from 'lucide-react';
 
 interface MemoriesScreenProps {
   isVisible: boolean;
@@ -16,12 +14,9 @@ interface MemoriesScreenProps {
 }
 
 const MemoriesScreen = ({ isVisible, songTitle, onShowMusic, onShowFinal }: MemoriesScreenProps) => {
-  const [memories, setMemories] = useState<Memory[]>(initialMemories);
+  const [memories] = useState<Memory[]>(initialMemories);
   const [currentCard, setCurrentCard] = useState(0);
   const [touchStartX, setTouchStartX] = useState(0);
-  const [isPending, startTransition] = useTransition();
-  const [enhancingMemoryId, setEnhancingMemoryId] = useState<string | null>(null);
-  const { toast } = useToast();
 
   const memoriesCount = useMemo(() => memories.length, [memories]);
 
@@ -37,25 +32,6 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowMusic, onShowFinal }: Memo
     setCurrentCard(index);
   };
   
-  const handleEnhance = async (memory: Memory) => {
-    setEnhancingMemoryId(memory.id);
-    startTransition(async () => {
-      const newText = await enhanceMemory({ image: memory.image, text: memory.text });
-      if (newText.includes('Não foi possível')) {
-         toast({
-          title: "Erro na IA",
-          description: newText,
-          variant: "destructive",
-        });
-      } else {
-        setMemories((prevMemories) =>
-          prevMemories.map((m) => (m.id === memory.id ? { ...m, text: newText } : m))
-        );
-      }
-      setEnhancingMemoryId(null);
-    });
-  };
-
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (!isVisible) return;
@@ -152,21 +128,6 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowMusic, onShowFinal }: Memo
                     {memory.text}
                   </p>
                 </div>
-                 {isCardActive && (
-                  <Button
-                    size="sm"
-                    className="absolute bottom-2 right-2 bg-accent/80 text-accent-foreground rounded-full hover:bg-accent h-9 w-9 p-2"
-                    onClick={(e) => { e.stopPropagation(); handleEnhance(memory); }}
-                    disabled={isPending && enhancingMemoryId === memory.id}
-                  >
-                    {isPending && enhancingMemoryId === memory.id ? (
-                      <Loader2 className="h-5 w-5 animate-spin" />
-                    ) : (
-                      <Wand2 className="h-5 w-5" />
-                    )}
-                    <span className="sr-only">Enhance message</span>
-                  </Button>
-                )}
               </div>
             );
           })}
