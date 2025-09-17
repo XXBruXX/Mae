@@ -246,5 +246,6 @@ body {
   );
   background-clip: text;
   font-size: 1rem;
+  font-family: 'Playfair Display', serif;
   color: transparent;
 }
