@@ -378,7 +378,7 @@ div.main {
   top: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(26, 26, 26, 0.7);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 9999px;
@@ -395,6 +395,7 @@ div.main {
   flex-direction: column;
   overflow: hidden;
   min-width: 0;
+  text-align: left;
 }
 
 .playing-text {
