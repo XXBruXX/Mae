@@ -297,6 +297,7 @@ body {
   width: 33px; /* width of 3 bars + margins */
   height: 33px;
   align-items: center;
+  justify-content: center;
 }
 .load {
   width: 2px;
