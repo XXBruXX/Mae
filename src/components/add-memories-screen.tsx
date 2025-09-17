@@ -34,8 +34,8 @@ const AddMemoriesScreen = ({ isVisible, sessionMemories, onAddCard, onFinish }: 
         description: `${sessionMemories.length} nova(s) memória(s) foram adicionadas ao álbum.`,
       });
 
-      setIsSaving(false); // Reset saving state
-      onFinish(); // Then navigate
+      setIsSaving(false);
+      onFinish();
 
     } catch (error) {
       console.error("Error saving memories:", error);
@@ -44,7 +44,7 @@ const AddMemoriesScreen = ({ isVisible, sessionMemories, onAddCard, onFinish }: 
         title: "Erro ao Salvar",
         description: "Não foi possível salvar as memórias. Tente novamente.",
       });
-      setIsSaving(false); // Also reset on error
+      setIsSaving(false);
     }
   };
 
