@@ -303,9 +303,14 @@ export const SparklesCore = (props: ParticlesProps) => {
 export function SparklesPreview() {
   return (
     <div className="h-full w-full flex flex-col items-center justify-center overflow-hidden">
-      <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-center text-white relative z-20">
-        Feliz Aniversário Mãe
-      </h1>
+      <div className="text-center relative z-20">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-widest uppercase" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+          Feliz Aniversário
+        </h2>
+        <h1 className="text-7xl sm:text-8xl md:text-9xl font-black text-white" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+          MÃE
+        </h1>
+      </div>
       <div className="w-[40rem] h-40 relative">
         <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-blue-500 to-transparent h-px w-3/4" />
         <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/4 blur-sm" />
