@@ -2,6 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
+import { SparklesPreview } from './sparkles';
 
 interface WelcomeScreenProps {
   isVisible: boolean;
@@ -16,9 +17,7 @@ const WelcomeScreen = ({ isVisible, onShowMemories }: WelcomeScreenProps) => {
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-12 pointer-events-none'
       )}
     >
-      <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl font-bold bg-gradient-to-r from-gray-300 via-gray-100 to-white bg-clip-text text-transparent mb-5 animate-shimmer [text-shadow:0_0_30px_rgba(255,255,255,0.3)]">
-        Feliz Aniversário, Mãe!
-      </h1>
+      <SparklesPreview />
       <p className="text-base sm:text-lg text-gray-300 mb-10 max-w-md italic">
         Você ilumina nossas vidas como as estrelas no céu.
       </p>
