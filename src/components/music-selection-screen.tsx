@@ -8,6 +8,7 @@ import { ArrowLeft } from 'lucide-react';
 interface MusicSelectionScreenProps {
   isVisible: boolean;
   onShowMemories: () => void;
+  onShowFinal: (songTitle?: string) => void;
 }
 
 const songs = [
@@ -16,11 +17,16 @@ const songs = [
   { id: '3', title: 'La Vie en Rose', artist: 'Édith Piaf' },
 ];
 
-const MusicSelectionScreen = ({ isVisible, onShowMemories }: MusicSelectionScreenProps) => {
+const MusicSelectionScreen = ({ isVisible, onShowMemories, onShowFinal }: MusicSelectionScreenProps) => {
   const [selectedSong, setSelectedSong] = useState<string | null>(null);
 
   const handleSelectSong = (songId: string) => {
     setSelectedSong(songId === selectedSong ? null : songId);
+  };
+
+  const handleChoose = () => {
+    const song = songs.find(s => s.id === selectedSong);
+    onShowFinal(song?.title);
   };
 
   return (
@@ -89,9 +95,9 @@ const MusicSelectionScreen = ({ isVisible, onShowMemories }: MusicSelectionScree
       <Button
         className="mt-8 bg-white/90 text-black font-bold hover:bg-white"
         disabled={!selectedSong}
-        onClick={() => alert(`Música selecionada: ${songs.find(s => s.id === selectedSong)?.title}`)}
+        onClick={handleChoose}
       >
-        Finalizar
+        Escolher
       </Button>
 
     </div>
