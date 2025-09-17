@@ -65,15 +65,17 @@ const MusicSelectionScreen = ({ isVisible, onShowMemories }: MusicSelectionScree
           </div>
           {songs.map(song => (
             <div key={song.id} className="loader" onClick={() => handleSelectSong(song.id)}>
-               {selectedSong === song.id ? (
-                <div className="loading">
-                  <div className="load"></div>
-                  <div className="load"></div>
-                  <div className="load"></div>
-                </div>
-              ) : (
-                <div className="play"></div>
-              )}
+              <div className="play-icon-container">
+                {selectedSong === song.id ? (
+                  <div className="loading">
+                    <div className="load"></div>
+                    <div className="load"></div>
+                    <div className="load"></div>
+                  </div>
+                ) : (
+                  <div className="play"></div>
+                )}
+              </div>
               <div className="albumcover"></div>
               <div className="song">
                 <p className="name">{song.title}</p>

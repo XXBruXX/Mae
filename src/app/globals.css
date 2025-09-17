@@ -254,58 +254,60 @@ body {
 /* From Uiverse.io by Praashoo7 adapted for this app*/
 .main {
   background-color: #080808;
-  color: hsl(var(--card-foreground));
-  padding: 1em;
-  padding-bottom: 1.1em;
+  color: hsl(var(--foreground));
+  padding: 1rem;
   border-radius: 15px;
-  margin: 1em;
+}
+.currentplaying {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem 1rem 1rem;
+}
+.spotify {
+  width: 50px;
+  height: 50px;
+}
+.heading {
+  color: hsl(var(--foreground));
+  font-size: 1.1em;
+  font-weight: bold;
 }
 .loader {
   display: flex;
   flex-direction: row;
-  height: 4em;
-  padding-left: 1em;
-  padding-right: 1em;
-  justify-content: flex-start;
   align-items: center;
+  height: 4rem;
+  padding: 0 1rem;
   border-radius: 10px;
-  transition: .4s ease-in-out;
+  transition: 0.2s ease-in-out;
   gap: 1rem;
 }
 .loader:hover {
   cursor: pointer;
   background-color: hsl(var(--muted));
 }
-.currentplaying {
-  display: flex;
-  margin: 1em;
-  align-items: center;
-}
-.spotify {
-  width: 50px;
-  height: 50px;
-  margin-right: 0.6em;
-}
-.heading {
-  color: hsl(var(--card-foreground));
-  font-size: 1.1em;
-  font-weight: bold;
-  align-self: center;
-}
-.loading {
-  display: flex;
-  width: 33px; /* width of 3 bars + margins */
+.play-icon-container {
+  width: 33px;
   height: 33px;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
-.load {
-  width: 2px;
+.loading {
+  display: flex;
+  width: 33px;
   height: 33px;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+.load {
+  width: 3px;
+  height: 30px;
   background-color: hsl(var(--primary));
   animation: 1s move6 infinite;
   border-radius: 5px;
-  margin: 0.1em;
 }
 .load:nth-child(1) {
   animation-delay: 0.2s;
@@ -317,28 +319,23 @@ body {
   animation-delay: 0.6s;
 }
 .play {
-  position: relative;
-  width: 33px;
-  height: 33px;
-  clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
-  background-color: hsl(var(--primary));
-  justify-self: center;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 16px solid hsl(var(--primary));
 }
 .albumcover {
-  position: relative;
   height: 40px;
   width: 40px;
   background-color: hsl(var(--muted));
-  align-self: center;
   border-radius: 5px;
 }
 .song {
-  position: relative;
-  color: hsl(var(--card-foreground));
-  align-self: center;
+  color: hsl(var(--foreground));
 }
 .artist {
-  font-size: 0.6em;
+  font-size: 0.8em;
   color: hsl(var(--muted-foreground));
 }
 @keyframes move6 {
@@ -356,3 +353,4 @@ body {
   }
 }
     
+
