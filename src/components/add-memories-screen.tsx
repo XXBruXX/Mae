@@ -31,19 +31,20 @@ const AddMemoriesScreen = ({ isVisible, sessionMemories, onAddCard, onFinish }: 
       
       toast({
         title: "Memórias Salvas!",
-        description: `${sessionMemories.length} novas memórias foram adicionadas ao álbum.`,
+        description: `${sessionMemories.length} nova(s) memória(s) foram adicionadas ao álbum.`,
       });
 
-      setIsSaving(false);
-      onFinish();
+      setIsSaving(false); // Reset saving state
+      onFinish(); // Then navigate
 
     } catch (error) {
+      console.error("Error saving memories:", error);
       toast({
         variant: "destructive",
         title: "Erro ao Salvar",
         description: "Não foi possível salvar as memórias. Tente novamente.",
       });
-      setIsSaving(false);
+      setIsSaving(false); // Also reset on error
     }
   };
 
