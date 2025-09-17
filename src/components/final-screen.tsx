@@ -22,7 +22,7 @@ const FinalScreen = ({ isVisible, songTitle, onNavigate }: FinalScreenProps) => 
     setCustomText(editText);
   };
 
-  const defaultText = "Hoje é um dia especial, e celebramos não apenas seu aniversário, mas a pessoa incrível que você é. Sua força, amor e carinho são a luz que guia nossa família. Que este novo ciclo traga ainda mais felicidade, saúde e momentos inesquecíveis. Nós te amamos infinitamente.";
+  const defaultText = "";
 
   return (
     <div
