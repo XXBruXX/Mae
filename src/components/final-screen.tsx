@@ -30,13 +30,7 @@ const FinalScreen = ({ isVisible, songTitle, onNavigate }: FinalScreenProps) => 
 
       {/* Container principal para centralizar o conteúdo */}
       <div className="flex-grow flex flex-col justify-center items-center text-center w-full max-w-2xl">
-        <div>
-          <h2 className="text-xs font-bold text-white tracking-widest uppercase" style={{ fontFamily: "'Poppins', sans-serif" }}>
-            Feliz Aniversário
-          </h2>
-        </div>
-
-        <p className="text-white/80 text-lg leading-relaxed max-w-xl mt-4">
+        <p className="text-white/80 text-lg leading-relaxed max-w-xl">
           Hoje é um dia especial, e celebramos não apenas seu aniversário, mas a pessoa incrível que você é. Sua força, amor e carinho são a luz que guia nossa família. Que este novo ciclo traga ainda mais felicidade, saúde e momentos inesquecíveis. Nós te amamos infinitamente.
         </p>
       </div>
