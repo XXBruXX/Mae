@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import { type Memory } from '@/lib/memories';
 import { Button } from './ui/button';
-import { ArrowRight, Music, Plus } from 'lucide-react';
+import { ArrowLeft, Music, Plus } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -22,10 +22,10 @@ import { Textarea } from '@/components/ui/textarea';
 interface MemoriesScreenProps {
   isVisible: boolean;
   songTitle?: string;
-  onShowMusic: () => void;
+  onShowFinal: () => void;
 }
 
-const MemoriesScreen = ({ isVisible, songTitle, onShowMusic }: MemoriesScreenProps) => {
+const MemoriesScreen = ({ isVisible, songTitle, onShowFinal }: MemoriesScreenProps) => {
   const [memories, setMemories] = useState<Memory[]>([]);
   const [currentCard, setCurrentCard] = useState(0);
   const [touchStartX, setTouchStartX] = useState(0);
@@ -164,15 +164,13 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowMusic }: MemoriesScreenPro
             </form>
           </DialogContent>
         </Dialog>
-
-        {memories.length > 0 && (
-          <Button
-            onClick={onShowMusic}
-            className="bg-white/10 border-2 border-white/30 text-white rounded-full px-4 py-2 backdrop-blur-sm hover:bg-white/20 hover:text-white"
-          >
-            Finalizar <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
-        )}
+        
+        <Button
+          onClick={onShowFinal}
+          className="bg-white/10 border-2 border-white/30 text-white rounded-full px-4 py-2 backdrop-blur-sm hover:bg-white/20 hover:text-white"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" /> Voltar
+        </Button>
       </div>
 
       <h2 className="font-headline text-4xl sm:text-5xl bg-gradient-to-r from-gray-300 via-gray-100 to-white bg-clip-text text-transparent mb-8 text-center">

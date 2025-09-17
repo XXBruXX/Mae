@@ -21,12 +21,12 @@ import { type Song } from '@/lib/memories';
 interface MusicSelectionScreenProps {
   isVisible: boolean;
   onShowWelcome: () => void;
-  onShowMemories: (songTitle?: string) => void;
+  onChoose: (songTitle?: string) => void;
 }
 
 const initialSongs: Song[] = [];
 
-const MusicSelectionScreen = ({ isVisible, onShowWelcome, onShowMemories }: MusicSelectionScreenProps) => {
+const MusicSelectionScreen = ({ isVisible, onShowWelcome, onChoose }: MusicSelectionScreenProps) => {
   const [songs, setSongs] = useState<Song[]>(initialSongs);
   const [selectedSong, setSelectedSong] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
@@ -37,7 +37,7 @@ const MusicSelectionScreen = ({ isVisible, onShowWelcome, onShowMemories }: Musi
 
   const handleChoose = () => {
     const song = songs.find(s => s.id === selectedSong);
-    onShowMemories(song?.title);
+    onChoose(song?.title);
   };
   
   const handleAddSong = (event: React.FormEvent<HTMLFormElement>) => {
