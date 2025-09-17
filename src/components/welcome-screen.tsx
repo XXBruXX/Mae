@@ -13,7 +13,7 @@ const WelcomeScreen = ({ isVisible, onShowMemories }: WelcomeScreenProps) => {
   const handleClick = () => {
     setTimeout(() => {
       onShowMemories();
-    }, 800);
+    }, 1200);
   };
 
   return (
