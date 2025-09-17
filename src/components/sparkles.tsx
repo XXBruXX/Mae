@@ -304,10 +304,10 @@ export function SparklesPreview() {
   return (
     <div className="h-full w-full flex flex-col items-center justify-center overflow-hidden">
       <div className="text-center relative z-20">
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-widest uppercase" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+        <h2 className="text-xs font-bold text-white tracking-widest uppercase" style={{ fontFamily: "'Montserrat', sans-serif" }}>
           Feliz Aniversario
         </h2>
-        <h1 className="text-7xl sm:text-8xl md:text-9xl font-black text-white" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+        <h1 className="text-8xl font-black text-white" style={{ fontFamily: "'Montserrat', sans-serif" }}>
           MAE
         </h1>
       </div>
