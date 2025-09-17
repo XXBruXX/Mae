@@ -31,9 +31,6 @@ const FinalScreen = ({ isVisible, songTitle, onNavigate }: FinalScreenProps) => 
       {/* Container principal para centralizar o conteúdo */}
       <div className="flex-grow flex flex-col justify-center items-center text-center w-full max-w-2xl">
         <div>
-          <h1 className="text-8xl font-black text-white" style={{ fontFamily: "'Montserrat', sans-serif", lineHeight: '1' }}>
-            MAE
-          </h1>
           <h2 className="text-xs font-bold text-white tracking-widest uppercase" style={{ fontFamily: "'Poppins', sans-serif" }}>
             Feliz Aniversário
           </h2>
