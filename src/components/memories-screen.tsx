@@ -114,7 +114,7 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowMusic, onShowFinal }: Memo
               <div
                 key={memory.id}
                 className={cn(
-                  'card absolute w-[280px] h-[380px] sm:w-[320px] sm:h-[420px] bg-card text-card-foreground rounded-lg p-4 shadow-[0_15px_40px_rgba(255,255,255,0.2)] transition-all duration-500 ease-out transform-style-3d cursor-pointer left-1/2 top-1/2 flex flex-col',
+                  'card absolute w-[280px] h-[380px] sm:w-[320px] sm:h-[420px] bg-white rounded-lg p-4 shadow-[0_15px_40px_rgba(255,255,255,0.2)] transition-all duration-500 ease-out transform-style-3d cursor-pointer left-1/2 top-1/2 flex flex-col',
                   { 'opacity-70': className === 'prev' || className === 'next', 'opacity-0': className === 'hidden', 'z-10': isCardActive, 'z-0': !isCardActive }
                 )}
                 style={{ transform: getTransform(className) }}
@@ -124,7 +124,7 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowMusic, onShowFinal }: Memo
                   {memory.image}
                 </div>
                 <div className="flex-grow flex items-center justify-center">
-                  <p className="font-headline text-xl text-center font-semibold leading-snug">
+                  <p className="font-headline text-xl text-center font-semibold leading-snug text-black">
                     {memory.text}
                   </p>
                 </div>
