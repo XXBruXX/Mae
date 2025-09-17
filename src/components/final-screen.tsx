@@ -1,8 +1,8 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Music, ArrowRight } from 'lucide-react';
-import { Button } from './ui/button';
+import { Music } from 'lucide-react';
+import { SparkleButton } from './ui/sparkle-button';
 
 interface FinalScreenProps {
   isVisible: boolean;
@@ -36,12 +36,9 @@ const FinalScreen = ({ isVisible, songTitle, onNavigate }: FinalScreenProps) => 
       </div>
 
       <div className="absolute bottom-16 md:bottom-20 text-center">
-        <Button 
-          onClick={onNavigate}
-          className="bg-white/10 border-2 border-white/30 text-white rounded-full px-6 py-3 backdrop-blur-sm hover:bg-white/20 hover:text-white"
-        >
-          Ver Álbum de Fotos <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
+        <SparkleButton onClick={onNavigate}>
+          Ver Álbum de Fotos
+        </SparkleButton>
       </div>
     </div>
   );
