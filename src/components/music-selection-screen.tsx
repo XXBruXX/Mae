@@ -18,7 +18,7 @@ const songs = [
 ];
 
 const MusicSelectionScreen = ({ isVisible, onShowMemories }: MusicSelectionScreenProps) => {
-  const [selectedSong, setSelectedSong] = useState<string | null>(null);
+  const [selectedSong, setSelectedSong] = useState<string | null>('1');
 
   const handleSelectSong = (songId: string) => {
     setSelectedSong(songId === selectedSong ? null : songId);
@@ -66,14 +66,8 @@ const MusicSelectionScreen = ({ isVisible, onShowMemories }: MusicSelectionScree
           </div>
           {songs.map(song => (
             <div key={song.id} className="loader" onClick={() => handleSelectSong(song.id)}>
-              <div className="song">
-                <p className="name">{song.title}</p>
-                <p className="artist">{song.artist}</p>
-              </div>
-              <div className="albumcover"></div>
-              {selectedSong === song.id ? (
+               {selectedSong === song.id ? (
                 <div className="loading">
-                  <div className="load"></div>
                   <div className="load"></div>
                   <div className="load"></div>
                   <div className="load"></div>
@@ -81,6 +75,11 @@ const MusicSelectionScreen = ({ isVisible, onShowMemories }: MusicSelectionScree
               ) : (
                 <div className="play"></div>
               )}
+              <div className="albumcover"></div>
+              <div className="song">
+                <p className="name">{song.title}</p>
+                <p className="artist">{song.artist}</p>
+              </div>
             </div>
           ))}
         </div>

@@ -251,34 +251,35 @@ body {
   color: transparent;
 }
 
-/* From Uiverse.io by Praashoo7 */
+/* From Uiverse.io by Praashoo7 adapted for this app*/
 .main {
-  background-color: transparent;
+  background-color: white;
   padding: 1em;
   padding-bottom: 1.1em;
   border-radius: 15px;
   margin: 1em;
-  color: white;
+  color: black;
 }
 .loader {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   height: 4em;
   padding-left: 1em;
   padding-right: 1em;
-  justify-content: right;
+  justify-content: flex-start;
+  align-items: center;
   border-radius: 10px;
   transition: .4s ease-in-out;
   gap: 1rem;
-  align-items: center;
 }
 .loader:hover {
   cursor: pointer;
-  background-color: hsla(0, 0%, 100%, 0.1);
+  background-color: lightgray;
 }
 .currentplaying {
   display: flex;
   margin: 1em;
+  align-items: center;
 }
 .spotify {
   width: 50px;
@@ -286,18 +287,21 @@ body {
   margin-right: 0.6em;
 }
 .heading {
-  color: white;
+  color: black;
   font-size: 1.1em;
   font-weight: bold;
   align-self: center;
 }
 .loading {
   display: flex;
+  width: 33px; /* width of 3 bars + margins */
+  height: 33px;
+  align-items: center;
 }
 .load {
   width: 2px;
   height: 33px;
-  background-color: hsl(var(--primary));
+  background-color: limegreen;
   animation: 1s move6 infinite;
   border-radius: 5px;
   margin: 0.1em;
@@ -315,27 +319,26 @@ body {
   position: relative;
   height: 1.6em;
   width: 1.6em;
-  clip-path: polygon(50% 50%, 100% 50%, 75% 6.6%);
-  background-color: white;
-  transform: rotate(-90deg);
+  clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+  background-color: black;
   justify-self: center;
 }
 .albumcover {
   position: relative;
   height: 40px;
   width: 40px;
-  background-color: hsl(var(--muted));
+  background-color: rgb(233, 232, 232);
   align-self: center;
   border-radius: 5px;
 }
 .song {
   position: relative;
-  color: white;
+  color: black;
   align-self: center;
 }
 .artist {
   font-size: 0.6em;
-  color: hsl(var(--muted-foreground));
+  color: grey;
 }
 @keyframes move6 {
   0% {
@@ -352,4 +355,3 @@ body {
   }
 }
     
-
