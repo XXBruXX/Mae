@@ -17,7 +17,7 @@ const songs = [
 ];
 
 const MusicSelectionScreen = ({ isVisible, onShowMemories }: MusicSelectionScreenProps) => {
-  const [selectedSong, setSelectedSong] = useState<string | null>('1');
+  const [selectedSong, setSelectedSong] = useState<string | null>(null);
 
   const handleSelectSong = (songId: string) => {
     setSelectedSong(songId === selectedSong ? null : songId);

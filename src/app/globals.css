@@ -275,7 +275,6 @@ body {
 }
 .loader {
   display: flex;
-  flex-direction: row;
   align-items: center;
   height: 4rem;
   padding: 0 1rem;
