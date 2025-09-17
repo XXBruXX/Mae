@@ -35,7 +35,7 @@ const FinalScreen = ({ isVisible, songTitle, onNavigate }: FinalScreenProps) => 
             Feliz Aniversário
           </h2>
           <h1 className="text-8xl font-black text-white" style={{ fontFamily: "'Montserrat', sans-serif", lineHeight: '1' }}>
-            MÃE
+            MAE
           </h1>
         </div>
 
