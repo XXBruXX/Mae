@@ -3,6 +3,7 @@
 import { cn } from '@/lib/utils';
 import { SparklesPreview } from './sparkles';
 import { SparkleButton } from './ui/sparkle-button';
+import { useEffect } from 'react';
 
 interface FinalScreenProps {
   isVisible: boolean;
@@ -11,11 +12,18 @@ interface FinalScreenProps {
 }
 
 const FinalScreen = ({ isVisible, songTitle, onNavigate }: FinalScreenProps) => {
-    const handleClick = () => {
-        setTimeout(() => {
-          onNavigate();
-        }, 900);
-      };
+    
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    if (isVisible) {
+      timeoutId = setTimeout(() => {
+        onNavigate();
+      }, 5000); 
+    }
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [isVisible, onNavigate]);
 
   return (
     <div
@@ -27,12 +35,10 @@ const FinalScreen = ({ isVisible, songTitle, onNavigate }: FinalScreenProps) => 
       <SparklesPreview />
       <div className="absolute inset-0 flex flex-col justify-center items-center text-center">
         <p className="text-white/80 text-lg mb-4">Com a trilha sonora de:</p>
-        <h2 className="font-headline text-4xl sm:text-5xl bg-gradient-to-r from-gray-300 via-gray-100 to-white bg-clip-text text-transparent mb-8 text-center">
+        <h2 className="font-headline text-4xl sm:text-5xl bg-gradient-to-r from-gray-300 via-gray-100 to-white bg-clip-text text-transparent mb-2 text-center">
           {songTitle || 'Uma música especial'}
         </h2>
-        <SparkleButton onClick={handleClick}>
-          Ver Álbum de Fotos
-        </SparkleButton>
+        <p className="text-white/60 text-base">Página Inicial</p>
       </div>
     </div>
   );
