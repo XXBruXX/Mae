@@ -13,12 +13,6 @@ interface FinalScreenProps {
 }
 
 const FinalScreen = ({ isVisible, songTitle, onNavigate }: FinalScreenProps) => {
-  const handleClick = () => {
-    setTimeout(() => {
-      onNavigate();
-    }, 900);
-  };
-  
   return (
     <div
       className={cn(
@@ -36,12 +30,17 @@ const FinalScreen = ({ isVisible, songTitle, onNavigate }: FinalScreenProps) => 
         </div>
       )}
 
-      <SparklesPreview />
-
-      <div className="absolute inset-0 flex flex-col justify-center items-center text-center">
-        <div className="absolute top-28 sm:top-40 text-center">
-          <span className="text-white/50 text-xs">Página Inicial</span>
-        </div>
+      <div className="absolute top-28 sm:top-24 text-center w-full">
+        <span className="text-white/50 text-xs">Página Inicial</span>
+      </div>
+      
+      <div className="flex flex-col items-center justify-center h-full">
+        <h2 className="text-xs font-bold text-white tracking-widest uppercase mb-[-1rem]" style={{ fontFamily: "'Poppins', sans-serif" }}>
+          Feliz Aniversario
+        </h2>
+        <h1 className="text-9xl font-black text-white" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+          MÃE
+        </h1>
       </div>
 
       <div className="absolute bottom-28 md:bottom-20 text-center">
