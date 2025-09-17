@@ -4,6 +4,13 @@ export type Memory = {
   text: string;
 };
 
+export type Song = {
+  id: string;
+  title: string;
+  artist: string;
+  icon: string;
+};
+
 export const initialMemories: Memory[] = [
   {
       id: "1",
@@ -36,3 +43,5 @@ export const initialMemories: Memory[] = [
       text: "Mãe, você é nossa estrela mais brilhante no céu da família."
   }
 ];
+
+    

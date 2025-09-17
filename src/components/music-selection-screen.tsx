@@ -3,7 +3,20 @@
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Plus } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+  DialogClose,
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { type Song } from '@/lib/memories';
 
 interface MusicSelectionScreenProps {
   isVisible: boolean;
@@ -11,14 +24,16 @@ interface MusicSelectionScreenProps {
   onShowMemories: (songTitle?: string) => void;
 }
 
-const songs = [
-  { id: '1', title: 'Como é grande o meu amor por você', artist: 'Roberto Carlos' },
-  { id: '2', title: 'Trem-Bala', artist: 'Ana Vilela' },
-  { id: '3', title: 'La Vie en Rose', artist: 'Édith Piaf' },
+const initialSongs: Song[] = [
+  { id: '1', title: 'Como é grande o meu amor por você', artist: 'Roberto Carlos', icon: '🎵' },
+  { id: '2', title: 'Trem-Bala', artist: 'Ana Vilela', icon: '🚂' },
+  { id: '3', title: 'La Vie en Rose', artist: 'Édith Piaf', icon: '🌹' },
 ];
 
 const MusicSelectionScreen = ({ isVisible, onShowWelcome, onShowMemories }: MusicSelectionScreenProps) => {
+  const [songs, setSongs] = useState<Song[]>(initialSongs);
   const [selectedSong, setSelectedSong] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
 
   const handleSelectSong = (songId: string) => {
     setSelectedSong(songId === selectedSong ? null : songId);
@@ -27,6 +42,25 @@ const MusicSelectionScreen = ({ isVisible, onShowWelcome, onShowMemories }: Musi
   const handleChoose = () => {
     const song = songs.find(s => s.id === selectedSong);
     onShowMemories(song?.title);
+  };
+  
+  const handleAddSong = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const title = formData.get('title') as string;
+    const artist = formData.get('artist') as string;
+    const icon = formData.get('icon') as string;
+
+    if (title && artist && icon && songs.length < 3) {
+      const newSong: Song = {
+        id: (songs.length + 1).toString(),
+        title,
+        artist,
+        icon,
+      };
+      setSongs(prevSongs => [...prevSongs, newSong]);
+      setOpen(false);
+    }
   };
 
   return (
@@ -64,7 +98,7 @@ const MusicSelectionScreen = ({ isVisible, onShowWelcome, onShowMemories }: Musi
                 <stop stopColor="#3dca76" offset=".428"></stop>
                 <stop stopColor="#34b171" offset="1"></stop>
               </linearGradient>
-              <path d="M57,32c0,12.837-9.663,23.404-22.115,24.837C33.942,56.942,32.971,57,32,57	c-1.644,0-3.25-0.163-4.808-0.471C15.683,54.298,7,44.163,7,32C7,18.192,18.192,7,32,7S57,18.192,57,32z" fill="url(#ipdIa4~cOclR8yt_ClW93b)"></path>
+              <path d="M57,32c0,12.837-9.663,23.404-22.115,24.837C33.942,56.942,32.971,57,32,57	c-1.644,0-3.25-0.163-4.808-0.471C15.683,54.298,7,44.163,7,32C7,18.192,18.192,7,32,7S57,18.192,57,32z" fill="url(#ipdIa44~cOclR8yt_ClW93b)"></path>
               <path d="M41.683,44.394c-0.365,0-0.731-0.181-1.096-0.365c-3.471-2.009-7.674-3.105-12.24-3.105	c-2.559,0-5.116,0.364-7.491,0.912c-0.365,0-0.914,0.183-1.096,0.183c-0.914,0-1.461-0.732-1.461-1.462	c0-0.913,0.547-1.463,1.279-1.643c2.923-0.732,5.846-1.096,8.951-1.096c5.116,0,9.866,1.276,13.885,3.655	c0.548,0.364,0.914,0.73,0.914,1.642C43.145,43.847,42.414,44.394,41.683,44.394z M44.241,38.181c-0.547,0-0.912-0.18-1.279-0.364	c-3.835-2.375-9.135-3.839-15.163-3.839c-2.924,0-5.664,0.366-7.674,0.916c-0.549,0.18-0.731,0.18-1.096,0.18	c-1.096,0-1.827-0.912-1.827-1.826c0-1.096,0.549-1.645,1.461-2.009c2.74-0.73,5.481-1.279,9.317-1.279	c6.213,0,12.241,1.463,16.991,4.384c0.73,0.364,1.096,1.096,1.096,1.826C46.069,37.269,45.337,38.181,44.241,38.181z M47.165,30.876	c-0.548,0-0.731-0.182-1.279-0.364c-4.385-2.559-10.961-4.021-17.356-4.021c-3.289,0-6.577,0.366-9.5,1.096	c-0.366,0-0.731,0.182-1.279,0.182c-1.279,0.183-2.193-0.912-2.193-2.192c0-1.279,0.731-2.009,1.644-2.192	c3.471-1.096,7.125-1.462,11.327-1.462c6.943,0,14.25,1.462,19.731,4.567c0.73,0.366,1.278,1.096,1.278,2.193	C49.357,29.961,48.442,30.876,47.165,30.876z" fill="#fff"></path>
             </svg>
             <p className="heading">Music Player</p>
@@ -82,13 +116,64 @@ const MusicSelectionScreen = ({ isVisible, onShowWelcome, onShowMemories }: Musi
                   <div className="play"></div>
                 )}
               </div>
-              <div className="albumcover"></div>
+              <div className="albumcover text-2xl flex items-center justify-center">{song.icon}</div>
               <div className="song">
                 <p className="name truncate">{song.title}</p>
                 <p className="artist">{song.artist}</p>
               </div>
             </div>
           ))}
+            {songs.length < 3 && (
+            <Dialog open={open} onOpenChange={setOpen}>
+              <DialogTrigger asChild>
+                <Button variant="outline" className="w-full mt-2">
+                  <Plus className="mr-2 h-4 w-4" /> Adicionar Música
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle>Adicionar Nova Música</DialogTitle>
+                  <DialogDescription>
+                    Preencha os detalhes da música. O limite é de 3 músicas.
+                  </DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleAddSong}>
+                  <div className="grid gap-4 py-4">
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="title" className="text-right">
+                        Nome
+                      </Label>
+                      <Input id="title" name="title" className="col-span-3" required />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="artist" className="text-right">
+                        Artista
+                      </Label>
+                      <Input id="artist" name="artist" className="col-span-3" required />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="icon" className="text-right">
+                        Ícone
+                      </Label>
+                      <Input id="icon" name="icon" placeholder="🎵" className="col-span-3" required />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="file" className="text-right">
+                        Arquivo
+                      </Label>
+                      <Input id="file" type="file" className="col-span-3" accept=".mp3,.mp4" />
+                    </div>
+                  </div>
+                  <DialogFooter>
+                    <DialogClose asChild>
+                      <Button type="button" variant="secondary">Cancelar</Button>
+                    </DialogClose>
+                    <Button type="submit">Salvar</Button>
+                  </DialogFooter>
+                </form>
+              </DialogContent>
+            </Dialog>
+          )}
         </div>
       </div>
       
@@ -105,3 +190,5 @@ const MusicSelectionScreen = ({ isVisible, onShowWelcome, onShowMemories }: Musi
 };
 
 export default MusicSelectionScreen;
+
+    
