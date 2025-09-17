@@ -1,12 +1,18 @@
 import { createClient } from '@supabase/supabase-js'
 
 // Configuração do Supabase
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://anpkpsevskdwjismguox.supabase.co'
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFucGtwc2V2c2tkd2ppc21ndW94Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc0MDY5MDEsImV4cCI6MjA1Mjk4MjkwMX0.-7Yq-0UQl1rnswJYvFnJX4PfgQWmTh8n3Zy8g6rQtpM'
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
 // Verificar se as variáveis estão configuradas corretamente
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('Configuração do Supabase não encontrada. Usando valores padrão.')
+  throw new Error(
+    'Supabase configuration missing! Please check your .env.local file.\n' +
+    '1. Copy .env.example to .env.local\n' +
+    '2. Get your API keys from https://supabase.com/dashboard\n' +
+    '3. Update NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY\n' +
+    '4. Restart your development server'
+  )
 }
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
