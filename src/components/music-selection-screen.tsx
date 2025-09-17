@@ -46,6 +46,7 @@ const MusicSelectionScreen = ({ isVisible, onShowMemories }: MusicSelectionScree
         <div className="main">
           <div className="currentplaying">
             <svg height="50px" width="50px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" className="spotify">
+              {/* SVG content from before - left out for brevity */}
               <radialGradient gradientUnits="userSpaceOnUse" gradientTransform="translate(0 -534)" r="43.888" cy="572.064" cx="33.34" id="ipdIa4~cOclR8yt_ClW93a">
                 <stop stopColor="#f4e9c3" offset="0"></stop>
                 <stop stopColor="#f8eecd" offset=".219"></stop>
