@@ -30,7 +30,7 @@ export default function Home() {
         <MusicSelectionScreen
           isVisible={currentScreen === 'music'}
           onShowWelcome={showWelcome}
-          onShowMemories={showFinal}
+          onShowMemories={showMemories}
         />
         <FinalScreen
           isVisible={currentScreen === 'final'}
