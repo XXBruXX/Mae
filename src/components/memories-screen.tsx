@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useMemo, useTransition } from 'react'
 import { cn } from '@/lib/utils';
 import { initialMemories, type Memory } from '@/lib/memories';
 import { Button } from './ui/button';
-import { ArrowRight, Loader2, Wand2, Music, ArrowLeft } from 'lucide-react';
+import { ArrowRight, Loader2, Wand2, Music } from 'lucide-react';
 import { enhanceMemory } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 
@@ -116,14 +116,6 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowMusic, onShowFinal }: Memo
         </div>
       )}
 
-      <Button
-        variant="ghost"
-        onClick={onShowMusic}
-        className="absolute top-4 left-4 sm:top-8 sm:left-8 bg-white/10 border-2 border-white/30 text-white rounded-full px-4 py-2 backdrop-blur-sm hover:bg-white/20 hover:text-white"
-      >
-        <ArrowLeft className="mr-2 h-4 w-4" /> Voltar
-      </Button>
-
       {currentCard === memoriesCount - 1 && (
         <Button
           onClick={onShowFinal}
@@ -156,7 +148,7 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowMusic, onShowFinal }: Memo
                   {memory.image}
                 </div>
                 <div className="flex-grow flex items-center justify-center">
-                  <p className="font-headline text-xl text-center text-gray-700 font-semibold leading-snug">
+                  <p className="font-headline text-xl text-center font-semibold leading-snug">
                     {memory.text}
                   </p>
                 </div>
@@ -203,5 +195,3 @@ const MemoriesScreen = ({ isVisible, songTitle, onShowMusic, onShowFinal }: Memo
 };
 
 export default MemoriesScreen;
-
-    
