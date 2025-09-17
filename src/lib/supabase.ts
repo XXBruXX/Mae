@@ -1,22 +1,32 @@
 import { createClient } from '@supabase/supabase-js'
 
 // Configuração do Supabase
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://anpkpsevskdwjismguox.supabase.co'
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFucGtwc2V2c2tkd2ppc21ndW94Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc0MDY5MDEsImV4cCI6MjA1Mjk4MjkwMX0.-7Yq-0UQl1rnswJYvFnJX4PfgQWmTh8n3Zy8g6rQtpM'
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
 // Verificar se as variáveis estão configuradas corretamente
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('Configuração do Supabase não encontrada. Usando valores padrão.')
+  console.error(
+    'Configuração do Supabase não encontrada! Verifique seu arquivo .env.local:\n' +
+    '1. Copie .env.example para .env.local\n' +
+    '2. Obtenha suas chaves da API em https://supabase.com/dashboard\n' +
+    '3. Atualize NEXT_PUBLIC_SUPABASE_URL e NEXT_PUBLIC_SUPABASE_ANON_KEY\n' +
+    '4. Reinicie seu servidor de desenvolvimento'
+  )
 } else {
   console.log('Supabase configurado com sucesso:', { url: supabaseUrl, hasKey: !!supabaseAnonKey })
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    persistSession: false, // Para desenvolvimento, não persistir sessão
-    autoRefreshToken: false
+export const supabase = createClient(
+  supabaseUrl || 'https://placeholder.supabase.co', 
+  supabaseAnonKey || 'placeholder-key', 
+  {
+    auth: {
+      persistSession: false, // Para desenvolvimento, não persistir sessão
+      autoRefreshToken: false
+    }
   }
-})
+)
 
 // Tipos do banco de dados
 export type Database = {
