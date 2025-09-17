@@ -107,11 +107,36 @@ const MusicSelectionScreen = ({ isVisible, onShowWelcome, onChoose }: MusicSelec
     const icon = formData.get('icon') as string;
     const audioFile = formData.get('audio-file') as File;
 
-    if (title && artist && icon && songs.length < 3) {
+    console.log('🎵 Iniciando adição de música:', { title, artist, icon, audioFile: !!audioFile });
+
+    if (!title || !artist || !icon) {
+      toast({
+        variant: "destructive",
+        title: "Campos Obrigatórios",
+        description: "Por favor, preencha todos os campos (nome, artista, ícone).",
+      });
+      return;
+    }
+
+    if (songs.length >= 3) {
+      toast({
+        variant: "destructive",
+        title: "Limite Atingido",
+        description: "Você já tem 3 músicas. Remova uma para adicionar outra.",
+      });
+      return;
+    }
+
+    try {
       let audioUrl = '';
       
       // Se um arquivo foi selecionado, converter para URL
       if (audioFile && audioFile.size > 0) {
+        console.log('🎧 Processando arquivo de áudio:', {
+          name: audioFile.name,
+          size: audioFile.size,
+          type: audioFile.type
+        });
         audioUrl = URL.createObjectURL(audioFile);
       }
       
@@ -122,15 +147,48 @@ const MusicSelectionScreen = ({ isVisible, onShowWelcome, onChoose }: MusicSelec
         audio_url: audioUrl
       };
       
+      console.log('📁 Enviando música para o banco:', newSong);
+      
       const newId = await addSong(newSong);
+      
       if (newId) {
+        console.log('✅ Música adicionada com ID:', newId);
         setSongs(prevSongs => [...prevSongs, { id: newId, ...newSong }]);
         toast({
           title: "Música Adicionada!",
-          description: `"${title}" foi adicionada à lista.`,
+          description: `"${title}" foi adicionada à lista com sucesso.`,
+        });
+        setOpen(false);
+        
+        // Limpar o formulário
+        (event.target as HTMLFormElement).reset();
+      } else {
+        console.error('❌ Falha ao adicionar música - ID não retornado');
+        toast({
+          variant: "destructive",
+          title: "Erro ao Adicionar",
+          description: "Não foi possível adicionar a música. Verifique o console para mais detalhes.",
         });
       }
-      setOpen(false);
+    } catch (error) {
+      console.error('💥 Erro no handleAddSong:', error);
+      
+      const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
+      
+      // Verificar se é erro RLS
+      if (errorMessage.includes('RLS') || errorMessage.includes('políticas de segurança')) {
+        toast({
+          variant: "destructive",
+          title: "Erro de Permissão",
+          description: "As políticas de segurança do banco precisam ser ajustadas. Consulte o console para mais detalhes.",
+        });
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Erro Inesperado",
+          description: errorMessage || "Ocorreu um erro inesperado. Tente novamente.",
+        });
+      }
     }
   };
 

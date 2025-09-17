@@ -7,9 +7,16 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOi
 // Verificar se as variáveis estão configuradas corretamente
 if (!supabaseUrl || !supabaseAnonKey) {
   console.warn('Configuração do Supabase não encontrada. Usando valores padrão.')
+} else {
+  console.log('Supabase configurado com sucesso:', { url: supabaseUrl, hasKey: !!supabaseAnonKey })
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: false, // Para desenvolvimento, não persistir sessão
+    autoRefreshToken: false
+  }
+})
 
 // Tipos do banco de dados
 export type Database = {

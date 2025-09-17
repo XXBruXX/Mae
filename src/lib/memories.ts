@@ -1,4 +1,5 @@
 import { supabase } from './supabase';
+import { diagnoseSupabaseIssues } from './supabase-diagnostics';
 
 export type Memory = {
   id: string;
@@ -130,6 +131,13 @@ export const getSongs = async (): Promise<Song[]> => {
 
 export const addSong = async (song: NewSong) => {
     try {
+        console.log('📝 Tentando adicionar música:', { 
+            title: song.title, 
+            artist: song.artist, 
+            icon: song.icon,
+            hasAudioUrl: !!song.audio_url
+        });
+        
         // Primeiro tentar inserir com todos os campos
         let { data, error } = await supabase
             .from('songs')
@@ -139,12 +147,14 @@ export const addSong = async (song: NewSong) => {
         
         // Se der erro, tentar apenas com campos básicos
         if (error && error.code === '42703') { // column does not exist
-            console.log('Campos de áudio não existem, inserindo apenas campos básicos');
+            console.log('⚠️ Campos de áudio não existem, inserindo apenas campos básicos');
             const basicSong = {
                 title: song.title,
                 artist: song.artist,
                 icon: song.icon
             };
+            
+            console.log('🔄 Tentando inserir música básica:', basicSong);
             
             const result = await supabase
                 .from('songs')
@@ -157,13 +167,31 @@ export const addSong = async (song: NewSong) => {
         }
         
         if (error) {
-            console.error('Error adding song:', error);
-            return null;
+            console.error('❌ Erro específico ao adicionar música:', {
+                code: error.code,
+                message: error.message,
+                details: error.details,
+                hint: error.hint
+            });
+            
+            // Verificar se é erro RLS/permissão (comum: 401, PGRST301)
+            if (error.code === 'PGRST301' || error.message?.includes('RLS') || error.message?.includes('policy')) {
+                // Executar diagnóstico automático
+                setTimeout(() => diagnoseSupabaseIssues(), 1000);
+                throw new Error(`🔒 ERRO RLS: As políticas de segurança do banco estão bloqueando a operação. Acesse o painel do Supabase e execute os comandos SQL para resolver.`);
+            }
+            
+            throw new Error(`Erro ${error.code || 'UNKNOWN'}: ${error.message || 'Erro desconhecido ao adicionar música'}`);
         }
         
+        console.log('✅ Música adicionada com sucesso:', data);
         return data?.id || null;
     } catch (e) {
-        console.error("Error adding song: ", e);
+        console.error('💥 Erro geral ao adicionar música:', {
+            error: e,
+            message: e instanceof Error ? e.message : 'Erro desconhecido',
+            stack: e instanceof Error ? e.stack : undefined
+        });
         return null;
     }
 };
