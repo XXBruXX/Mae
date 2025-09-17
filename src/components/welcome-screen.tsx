@@ -19,9 +19,6 @@ const WelcomeScreen = ({ isVisible, onShowMemories }: WelcomeScreenProps) => {
     >
       <SparklesPreview />
       <div className="absolute bottom-20 text-center">
-        <p className="text-base sm:text-lg text-gray-300 mb-10 max-w-md italic">
-          Você ilumina nossas vidas como as estrelas no céu.
-        </p>
         <Button
           onClick={onShowMemories}
           className="bg-gradient-to-r from-gray-300 via-gray-100 to-white text-black px-8 py-6 rounded-full text-base font-semibold shadow-[0_8px_25px_rgba(255,255,255,0.2)] transition-all duration-300 ease-in-out hover:shadow-[0_12px_35px_rgba(255,255,255,0.3)] hover:-translate-y-1 relative overflow-hidden group"
