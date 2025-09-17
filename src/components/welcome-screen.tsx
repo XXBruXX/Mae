@@ -12,8 +12,8 @@ interface WelcomeScreenProps {
 const WelcomeScreen = ({ isVisible, onShowMemories }: WelcomeScreenProps) => {
   const handleClick = () => {
     setTimeout(() => {
-      onShowMemories();
-    }, 1500);
+      onShowMemedories();
+    }, 1300);
   };
 
   return (
