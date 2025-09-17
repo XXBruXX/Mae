@@ -24,7 +24,7 @@ const WelcomeScreen = ({ isVisible, onNavigate }: WelcomeScreenProps) => {
       )}
     >
       <SparklesPreview />
-      <div className="absolute bottom-28 md:bottom-20 text-center">
+      <div className="absolute bottom-32 md:bottom-24 text-center">
         <SparkleButton onClick={handleClick}>
           Começar
         </SparkleButton>
