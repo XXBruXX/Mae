@@ -1,8 +1,6 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { SparklesPreview } from './sparkles';
-import { SparkleButton } from './ui/sparkle-button';
 import { Music, ArrowRight } from 'lucide-react';
 import { Button } from './ui/button';
 
@@ -16,34 +14,37 @@ const FinalScreen = ({ isVisible, songTitle, onNavigate }: FinalScreenProps) => 
   return (
     <div
       className={cn(
-        'absolute inset-0 flex flex-col justify-center items-center text-center p-5 transition-all duration-800 ease-out',
+        'absolute inset-0 flex flex-col items-center text-center p-5 transition-all duration-800 ease-out',
         isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       )}
     >
-      {songTitle && (
-        <div className="now-playing-banner">
-          <Music className="h-5 w-5 text-white/80" />
-          <div className="song-info">
-            <span className="playing-text">Tocando Agora:</span>
-            <span className="song-title-banner truncate">{songTitle}</span>
-          </div>
+      {/* Container to push content down from the top */}
+      <div className="flex-grow flex flex-col justify-center items-center w-full max-w-2xl">
+        {songTitle && (
+            <div className="now-playing-banner" style={{position: 'absolute', top: '1.5rem'}}>
+            <Music className="h-5 w-5 text-white/80" />
+            <div className="song-info">
+                <span className="playing-text">Tocando Agora:</span>
+                <span className="song-title-banner truncate">{songTitle}</span>
+            </div>
+            </div>
+        )}
+
+        <div className='mt-24'>
+            <h2 className="text-xs font-bold text-white tracking-widest uppercase" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                Feliz Aniversário
+            </h2>
+            <h1 className="text-8xl font-black text-white" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                MÃE
+            </h1>
         </div>
-      )}
 
-      <div className="absolute top-28 sm:top-24 text-center w-full">
-        <span className="text-white/50 text-xs">Página Inicial</span>
-      </div>
-      
-      <div className="flex flex-col items-center justify-center h-full">
-        <h2 className="text-xs font-bold text-white tracking-widest uppercase mb-[-1rem]" style={{ fontFamily: "'Poppins', sans-serif" }}>
-          Feliz Aniversario
-        </h2>
-        <h1 className="text-9xl font-black text-white" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-          MÃE
-        </h1>
+        <p className="mt-8 text-white/80 text-lg leading-relaxed max-w-xl">
+          Hoje é um dia especial, e celebramos não apenas seu aniversário, mas a pessoa incrível que você é. Sua força, amor e carinho são a luz que guia nossa família. Que este novo ciclo traga ainda mais felicidade, saúde e momentos inesquecíveis. Nós te amamos infinitamente.
+        </p>
       </div>
 
-      <div className="absolute bottom-28 md:bottom-20 text-center">
+      <div className="absolute bottom-16 md:bottom-20 text-center">
         <Button 
           onClick={onNavigate}
           className="bg-white/10 border-2 border-white/30 text-white rounded-full px-6 py-3 backdrop-blur-sm hover:bg-white/20 hover:text-white"
