@@ -324,7 +324,7 @@ export function SparklesPreview() {
           particleColor="#FFFFFF"
         />
 
-        <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(ellipse_at_top,transparent_10%,black_50%)]"></div>
+        <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(ellipse_at_top,transparent_10%,black_40%)] md:[mask-image:radial-gradient(ellipse_at_top,transparent_10%,black_70%)]"></div>
       </div>
     </div>
   );
