@@ -254,14 +254,15 @@ body {
 /* From Uiverse.io by Praashoo7 */
 .loader {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   height: 4em;
   padding-left: 1em;
   padding-right: 1em;
-  transform: rotate(180deg);
   justify-content: right;
   border-radius: 10px;
   transition: .4s ease-in-out;
+  gap: 1rem;
+  align-items: center;
 }
 
 .loader:hover {
@@ -289,7 +290,6 @@ body {
 
 .loading {
   display: flex;
-  margin-top: 1em;
   margin-left: 0.3em;
 }
 
@@ -316,20 +316,16 @@ body {
 
 .play {
   position: relative;
-  left: 0.35em;
   height: 1.6em;
   width: 1.6em;
   clip-path: polygon(50% 50%, 100% 50%, 75% 6.6%);
   background-color: white;
   transform: rotate(-90deg);
-  align-self: center;
-  margin-top: 0.7em;
   justify-self: center;
 }
 
 .albumcover {
   position: relative;
-  margin-right: 1em;
   height: 40px;
   width: 40px;
   background-color: hsl(var(--muted));
@@ -339,8 +335,6 @@ body {
 
 .song {
   position: relative;
-  transform: rotate(180deg);
-  margin-right: 1em;
   color: white;
   align-self: center;
 }

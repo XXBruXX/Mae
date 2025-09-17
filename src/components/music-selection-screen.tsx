@@ -99,5 +99,3 @@ const MusicSelectionScreen = ({ isVisible, onShowMemories }: MusicSelectionScree
 };
 
 export default MusicSelectionScreen;
-
-    
