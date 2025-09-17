@@ -318,8 +318,8 @@ body {
 }
 .play {
   position: relative;
-  height: 1.6em;
-  width: 1.6em;
+  width: 33px;
+  height: 33px;
   clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
   background-color: hsl(var(--primary));
   justify-self: center;
