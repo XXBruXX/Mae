@@ -254,11 +254,9 @@ body {
 /* From Uiverse.io by Praashoo7 */
 .loader {
   display: flex;
-  flex-direction: row-reverse;
   height: 4em;
   padding-left: 1em;
   padding-right: 1em;
-  justify-content: right;
   border-radius: 10px;
   transition: .4s ease-in-out;
   gap: 1rem;
@@ -290,7 +288,6 @@ body {
 
 .loading {
   display: flex;
-  margin-left: 0.3em;
 }
 
 .load {
